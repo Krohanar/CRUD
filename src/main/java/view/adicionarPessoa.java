@@ -1,27 +1,23 @@
 package view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
+
+import com.toedter.calendar.JDateChooser;
 
 import Percistencia.JdbcFuncionario;
 import Percistencia.conexao;
 import iplaceModel.Funcionario;
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JTextPane;
-import com.toedter.calendar.JDayChooser;
-import com.toedter.calendar.JDateChooser;
 
 public class adicionarPessoa extends JFrame {
 
@@ -112,15 +108,19 @@ public class adicionarPessoa extends JFrame {
 		cadastra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				String nome_pessoa, data_cadastro_funcionario;
+				int idade, codigo_cargo;
 				conexao empresa = new conexao();
-
-				SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
-				String nome_pessoa = campoNome.getText();
-				int idade = Integer.parseInt(campoIdade.getText());
-				int codigo_cargo = Integer.parseInt(campoCargo.getText());
-				String data_cadastro_funcionario = dFormat.format(dateChooser.getDate());
-
+				
+				nome_pessoa = campoNome.getText();
+				idade = Integer.parseInt(campoIdade.getText());	
+				codigo_cargo = Integer.parseInt(campoCargo.getText());
+			
 				Funcionario g = new Funcionario();
+				g.setNome_pessoa(nome_pessoa);
+				g.setIdade(idade);
+				g.setCodigo_cargo(codigo_cargo);
+				g.setData_cadastro_funcionario(dateChooser.getDate());
 
 				JdbcFuncionario gerente = new JdbcFuncionario(empresa.abrirconexao());
 				gerente.inserirFuncionario(g);

@@ -97,6 +97,8 @@ public class listaPessoas extends JFrame {
 		
 				
 		JTextPane txtpnMenu = new JTextPane();
+		txtpnMenu.setEnabled(false);
+		txtpnMenu.setEditable(false);
 		txtpnMenu.setText("iPlace System");
 		txtpnMenu.setForeground(Color.WHITE);
 		txtpnMenu.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 20));
@@ -113,16 +115,16 @@ public class listaPessoas extends JFrame {
 		scrollPane.setBounds(10, 199, 414, -126);
 		contentPane.add(scrollPane);
 		
-		tbFuncionario = new JTable();
-		tbFuncionario.setToolTipText("");
-		tbFuncionario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tbFuncionario.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"CodigoPessoa", "NomePessoa", "Idade", "DataCadastro", "CodigoCargo"
-			}
-		));
+//		table.setBackground(Color.WHITE);
+		
+		textField = new JTextField();
+		textField.setText("<");
+		textField.setForeground(Color.WHITE);
+		textField.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 18));
+		textField.setColumns(10);
+		textField.setBackground(Color.DARK_GRAY);
+		textField.setBounds(33, 39, 20, 20);
+		contentPane.add(textField);
 		
 		JTextPane txtpnFuncionrios = new JTextPane();
 		txtpnFuncionrios.setText("Funcionários");
@@ -131,11 +133,6 @@ public class listaPessoas extends JFrame {
 		txtpnFuncionrios.setBackground(Color.DARK_GRAY);
 		txtpnFuncionrios.setBounds(160, 39, 100, 20);
 		contentPane.add(txtpnFuncionrios);
-		
-	
-		tbFuncionario.getColumnModel().getColumn(0).setMinWidth(56);
-		tbFuncionario.setBounds(38, 84, 373, 103);
-		contentPane.add(tbFuncionario);
 		
 		JButton lista = new JButton("Listar");
 		lista.addActionListener(new ActionListener() {
@@ -173,5 +170,6 @@ public class listaPessoas extends JFrame {
 		});
 		btnNewButton.setBounds(10, 39, 46, 23);
 		contentPane.add(btnNewButton);
+
 	}
 }
