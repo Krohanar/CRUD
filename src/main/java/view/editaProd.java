@@ -12,6 +12,8 @@ import java.awt.Color;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JSpinner;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class editaProd extends JFrame {
 
@@ -29,10 +31,10 @@ public class editaProd extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextPane txtpnEditarCadastroDe_1;
-	private JTextField textField_5;
 	private JTextPane txtpnAlterarQtd;
 	private JTextField textField_6;
 	private JTextPane txtpnDataAtualizao;
+	private JButton btnNewButton_1;
 
 
 	/**
@@ -62,13 +64,13 @@ public class editaProd extends JFrame {
 		
 		btnNewButton = new JButton("Cancelar");
 		btnNewButton.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		btnNewButton.setBackground(Color.DARK_GRAY);
+		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.setBounds(63, 214, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		btnConcludo = new JButton("Concluído");
 		btnConcludo.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		btnConcludo.setBackground(Color.DARK_GRAY);
+		btnConcludo.setBackground(Color.WHITE);
 		btnConcludo.setBounds(291, 214, 89, 23);
 		contentPane.add(btnConcludo);
 		
@@ -135,15 +137,6 @@ public class editaProd extends JFrame {
 		txtpnEditarCadastroDe_1.setBounds(114, 39, 201, 20);
 		contentPane.add(txtpnEditarCadastroDe_1);
 		
-		textField_5 = new JTextField();
-		textField_5.setText("<");
-		textField_5.setForeground(Color.WHITE);
-		textField_5.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 18));
-		textField_5.setColumns(10);
-		textField_5.setBackground(Color.DARK_GRAY);
-		textField_5.setBounds(30, 38, 20, 20);
-		contentPane.add(textField_5);
-		
 		txtpnAlterarQtd = new JTextPane();
 		txtpnAlterarQtd.setText("Alterar Qtd");
 		txtpnAlterarQtd.setForeground(Color.WHITE);
@@ -169,5 +162,19 @@ public class editaProd extends JFrame {
 		JSpinner spinner = new JSpinner();
 		spinner.setBounds(113, 165, 54, 20);
 		contentPane.add(spinner);
+		
+		btnNewButton_1 = new JButton("<");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				listaProdutos listaProdVoltar = new listaProdutos();
+				listaProdVoltar.setVisible(true);
+				
+				dispose();
+				
+			}
+		});
+		btnNewButton_1.setBounds(10, 39, 41, 23);
+		contentPane.add(btnNewButton_1);
 	}
 }

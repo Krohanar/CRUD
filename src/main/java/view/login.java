@@ -74,7 +74,7 @@ public class login extends JFrame {
 		JButton btnNewButton = new JButton("Entrar");
 		btnNewButton.setForeground(SystemColor.windowText);
 		btnNewButton.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
-		btnNewButton.setBackground(Color.DARK_GRAY);
+		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
