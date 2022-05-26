@@ -7,6 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import Percistencia.JdbcFuncionario;
+import Percistencia.conexao;
+import iplaceModel.Funcionario;
+
 import javax.swing.JTable;
 import javax.swing.JTextPane;
 import javax.swing.JList;
@@ -18,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JScrollPane;
@@ -25,12 +31,15 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import javax.swing.ScrollPaneConstants;
 import java.awt.Toolkit;
+import javax.swing.border.LineBorder;
+import javax.swing.ListSelectionModel;
 
 public class listaPessoas extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	private JTextField textField;
+	private JTable tbFuncionario;
 
 	public listaPessoas() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
@@ -42,25 +51,24 @@ public class listaPessoas extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton bntAdd = new JButton("Adicionar");
-		bntAdd.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		bntAdd.setBackground(Color.DARK_GRAY);
-		bntAdd.addMouseListener(new MouseAdapter() {
+		JButton adiciona = new JButton("Adicionar");
+		adiciona.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
+		adiciona.setBackground(Color.DARK_GRAY);
+		adiciona.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				adicionarPessoa addP = new adicionarPessoa();
-				addP.setVisible(true);
-				
+				adicionarPessoa gerente = new adicionarPessoa();
+				gerente.setVisible(true);
 			}
 		});
-		bntAdd.setBounds(33, 215, 89, 23);
-		contentPane.add(bntAdd);
+		adiciona.setBounds(33, 215, 89, 23);
+		contentPane.add(adiciona);
 		
-		JButton bntEdit = new JButton("Editar");
-		bntEdit.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		bntEdit.setBackground(Color.DARK_GRAY);
-		bntEdit.addActionListener(new ActionListener() {
+		JButton edita = new JButton("Editar");
+		edita.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
+		edita.setBackground(Color.DARK_GRAY);
+		edita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				editarAdmin editAdm = new editarAdmin();
@@ -68,13 +76,13 @@ public class listaPessoas extends JFrame {
 				
 			}
 		});
-		bntEdit.setBounds(171, 215, 89, 23);
-		contentPane.add(bntEdit);
+		edita.setBounds(171, 215, 89, 23);
+		contentPane.add(edita);
 		
-		JButton bntDelete = new JButton("Excluir");
-		bntDelete.setBackground(Color.DARK_GRAY);
-		bntDelete.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		bntDelete.addActionListener(new ActionListener() {
+		JButton exclue = new JButton("Excluir");
+		exclue.setBackground(Color.DARK_GRAY);
+		exclue.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
+		exclue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				//TODO
@@ -83,8 +91,8 @@ public class listaPessoas extends JFrame {
 				
 			}
 		});
-		bntDelete.setBounds(312, 215, 89, 23);
-		contentPane.add(bntDelete);
+		exclue.setBounds(312, 215, 89, 23);
+		contentPane.add(exclue);
 		
 				
 		JTextPane txtpnMenu = new JTextPane();
@@ -101,17 +109,22 @@ public class listaPessoas extends JFrame {
 		contentPane.add(textPane);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(33, 199, 321, -114);
+		scrollPane.setBounds(10, 199, 414, -126);
 		contentPane.add(scrollPane);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(33, 78, 368, 126);
-		contentPane.add(scrollPane_1);
+		tbFuncionario = new JTable();
+		tbFuncionario.setToolTipText("");
+		tbFuncionario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tbFuncionario.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"CodigoPessoa", "NomePessoa", "Idade", "DataCadastro", "CodigoCargo"
+			}
+		));
 		
-		
-		
-		table.setBackground(Color.WHITE);
-		scrollPane_1.setColumnHeaderView(table);
+
+//		table.setBackground(Color.WHITE);
 		
 		textField = new JTextField();
 		textField.setText("<");
@@ -129,5 +142,34 @@ public class listaPessoas extends JFrame {
 		txtpnFuncionrios.setBackground(Color.DARK_GRAY);
 		txtpnFuncionrios.setBounds(160, 39, 100, 20);
 		contentPane.add(txtpnFuncionrios);
+		
+	
+		tbFuncionario.getColumnModel().getColumn(0).setMinWidth(56);
+		tbFuncionario.setBounds(38, 84, 373, 103);
+		contentPane.add(tbFuncionario);
+		
+		JButton lista = new JButton("Listar");
+		lista.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				conexao empresa = new conexao();
+				JdbcFuncionario atendente = new JdbcFuncionario(empresa.abrirconexao()); 	
+			   ArrayList<Funcionario> funcionarios = atendente.listarFuncionario();
+			   empresa.fechaconexao();
+			   
+			   //adiciona na tabela
+			   
+			   DefaultTableModel modelo = (DefaultTableModel)tbFuncionario.getModel();
+			   modelo.setNumRows(0);		   
+	   for (Funcionario a:funcionarios) {
+		   modelo.addRow(new Object[] {
+				   a.getCodigo_pessoa(),a.getNome_pessoa(), a.getIdade(), a.getData_cadastro_funcionario(), a.getCodigo_cargo()
+		   });	   
+			   } 			
+				
+			}
+		});
+		lista.setBounds(333, 53, 68, 20);
+		contentPane.add(lista);
 	}
 }
