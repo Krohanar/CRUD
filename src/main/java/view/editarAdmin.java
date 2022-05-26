@@ -12,12 +12,12 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class editarAdmin extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
@@ -33,15 +33,6 @@ public class editarAdmin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setText("<");
-		textField.setForeground(Color.WHITE);
-		textField.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 18));
-		textField.setColumns(10);
-		textField.setBackground(Color.DARK_GRAY);
-		textField.setBounds(30, 38, 20, 20);
-		contentPane.add(textField);
-		
 		JTextPane txtpnEditarCadastroDe = new JTextPane();
 		txtpnEditarCadastroDe.setText("Editar Cadastro de Funcionário");
 		txtpnEditarCadastroDe.setForeground(Color.WHITE);
@@ -49,20 +40,6 @@ public class editarAdmin extends JFrame {
 		txtpnEditarCadastroDe.setBackground(Color.DARK_GRAY);
 		txtpnEditarCadastroDe.setBounds(102, 38, 246, 20);
 		contentPane.add(txtpnEditarCadastroDe);
-		
-		JTextPane txtpnAlterarNome = new JTextPane();
-		txtpnAlterarNome.setText("Alterar Nome");
-		txtpnAlterarNome.setForeground(Color.WHITE);
-		txtpnAlterarNome.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
-		txtpnAlterarNome.setBackground(Color.DARK_GRAY);
-		txtpnAlterarNome.setBounds(24, 84, 79, 20);
-		contentPane.add(txtpnAlterarNome);
-		
-		textField_1 = new JTextField();
-		textField_1.setToolTipText("");
-		textField_1.setColumns(10);
-		textField_1.setBounds(102, 84, 132, 20);
-		contentPane.add(textField_1);
 		
 		JTextPane txtpnData = new JTextPane();
 		txtpnData.setText("Data do Cadastro");
@@ -79,16 +56,16 @@ public class editarAdmin extends JFrame {
 		contentPane.add(textField_2);
 		
 		JTextPane txtpnAlterarCargo = new JTextPane();
-		txtpnAlterarCargo.setText("Alterar Cargo");
+		txtpnAlterarCargo.setText("Alterar Cargo:");
 		txtpnAlterarCargo.setForeground(Color.WHITE);
 		txtpnAlterarCargo.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		txtpnAlterarCargo.setBackground(Color.DARK_GRAY);
-		txtpnAlterarCargo.setBounds(24, 125, 79, 20);
+		txtpnAlterarCargo.setBounds(30, 84, 79, 20);
 		contentPane.add(txtpnAlterarCargo);
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(102, 125, 132, 20);
+		textField_3.setBounds(106, 84, 132, 20);
 		contentPane.add(textField_3);
 		
 		JTextPane txtpnId = new JTextPane();
@@ -106,27 +83,27 @@ public class editarAdmin extends JFrame {
 		contentPane.add(textField_4);
 		
 		JTextPane txtpnRedefinirSenha = new JTextPane();
-		txtpnRedefinirSenha.setText("Redefinir Senha");
+		txtpnRedefinirSenha.setText("Redefinir Senha:");
 		txtpnRedefinirSenha.setForeground(Color.WHITE);
 		txtpnRedefinirSenha.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		txtpnRedefinirSenha.setBackground(Color.DARK_GRAY);
-		txtpnRedefinirSenha.setBounds(91, 170, 93, 20);
+		txtpnRedefinirSenha.setBounds(30, 125, 93, 20);
 		contentPane.add(txtpnRedefinirSenha);
 		
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
-		textField_5.setBounds(172, 170, 143, 20);
+		textField_5.setBounds(116, 125, 120, 20);
 		contentPane.add(textField_5);
 		
 		JButton btnNewButton_1 = new JButton("Cancelar");
 		btnNewButton_1.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		btnNewButton_1.setBackground(Color.DARK_GRAY);
+		btnNewButton_1.setBackground(Color.WHITE);
 		btnNewButton_1.setBounds(63, 214, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnConcludo = new JButton("Concluído");
 		btnConcludo.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		btnConcludo.setBackground(Color.DARK_GRAY);
+		btnConcludo.setBackground(Color.WHITE);
 		btnConcludo.setBounds(291, 214, 89, 23);
 		contentPane.add(btnConcludo);
 		
@@ -142,5 +119,17 @@ public class editarAdmin extends JFrame {
 		textPane.setBackground(new Color(153, 204, 0));
 		textPane.setBounds(0, 257, 434, 4);
 		contentPane.add(textPane);
+		
+		JButton btnNewButton = new JButton("<");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				adicionarPessoa addPesVoltar = new adicionarPessoa();
+				addPesVoltar.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton.setBounds(10, 35, 42, 23);
+		contentPane.add(btnNewButton);
 	}
 }

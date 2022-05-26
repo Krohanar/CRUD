@@ -38,7 +38,6 @@ public class listaPessoas extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private JTextField textField;
 	private JTable tbFuncionario;
 
 	public listaPessoas() {
@@ -53,13 +52,14 @@ public class listaPessoas extends JFrame {
 		
 		JButton adiciona = new JButton("Adicionar");
 		adiciona.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		adiciona.setBackground(Color.DARK_GRAY);
+		adiciona.setBackground(Color.WHITE);
 		adiciona.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
 				adicionarPessoa gerente = new adicionarPessoa();
 				gerente.setVisible(true);
+				dispose();
 			}
 		});
 		adiciona.setBounds(33, 215, 89, 23);
@@ -67,12 +67,13 @@ public class listaPessoas extends JFrame {
 		
 		JButton edita = new JButton("Editar");
 		edita.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		edita.setBackground(Color.DARK_GRAY);
+		edita.setBackground(Color.WHITE);
 		edita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				editarAdmin editAdm = new editarAdmin();
 				editAdm.setVisible(true);
+				dispose();
 				
 			}
 		});
@@ -80,7 +81,7 @@ public class listaPessoas extends JFrame {
 		contentPane.add(edita);
 		
 		JButton exclue = new JButton("Excluir");
-		exclue.setBackground(Color.DARK_GRAY);
+		exclue.setBackground(Color.WHITE);
 		exclue.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		exclue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -123,18 +124,6 @@ public class listaPessoas extends JFrame {
 			}
 		));
 		
-
-//		table.setBackground(Color.WHITE);
-		
-		textField = new JTextField();
-		textField.setText("<");
-		textField.setForeground(Color.WHITE);
-		textField.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 18));
-		textField.setColumns(10);
-		textField.setBackground(Color.DARK_GRAY);
-		textField.setBounds(33, 39, 20, 20);
-		contentPane.add(textField);
-		
 		JTextPane txtpnFuncionrios = new JTextPane();
 		txtpnFuncionrios.setText("Funcionários");
 		txtpnFuncionrios.setForeground(Color.WHITE);
@@ -171,5 +160,18 @@ public class listaPessoas extends JFrame {
 		});
 		lista.setBounds(333, 53, 68, 20);
 		contentPane.add(lista);
+		
+		JButton btnNewButton = new JButton("<");
+		btnNewButton.setFont(new Font("Franklin Gothic Demi", Font.BOLD, 9));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				menuPrincipal voltarMain = new menuPrincipal();
+				voltarMain.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton.setBounds(10, 39, 46, 23);
+		contentPane.add(btnNewButton);
 	}
 }
