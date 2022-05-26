@@ -36,12 +36,11 @@ public class menuPrincipal extends JFrame {
 		JButton btnFuncionario = new JButton("Funcionários");
 		btnFuncionario.setForeground(new Color(0, 0, 0));
 		btnFuncionario.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 20));
-		btnFuncionario.setBackground(Color.WHITE);
+		btnFuncionario.setBackground(Color.DARK_GRAY);
 		btnFuncionario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listaPessoas listaP = new listaPessoas();
 				listaP.setVisible(true);
-				dispose();
 			}
 		});
 
@@ -52,12 +51,11 @@ public class menuPrincipal extends JFrame {
 		JButton bntProduto = new JButton("Produtos");
 		bntProduto.setForeground(new Color(0, 0, 0));
 		bntProduto.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 20));
-		bntProduto.setBackground(Color.WHITE);
+		bntProduto.setBackground(Color.DARK_GRAY);
 		bntProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listaProdutos listaProd = new listaProdutos();
 				listaProd.setVisible(true);
-				dispose();
 			}
 		});		
 		
