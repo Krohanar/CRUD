@@ -96,6 +96,8 @@ public class listaPessoas extends JFrame {
 		
 				
 		JTextPane txtpnMenu = new JTextPane();
+		txtpnMenu.setEnabled(false);
+		txtpnMenu.setEditable(false);
 		txtpnMenu.setText("iPlace System");
 		txtpnMenu.setForeground(Color.WHITE);
 		txtpnMenu.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 20));
@@ -111,17 +113,6 @@ public class listaPessoas extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 199, 414, -126);
 		contentPane.add(scrollPane);
-		
-		tbFuncionario = new JTable();
-		tbFuncionario.setToolTipText("");
-		tbFuncionario.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tbFuncionario.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"CodigoPessoa", "NomePessoa", "Idade", "DataCadastro", "CodigoCargo"
-			}
-		));
 		
 
 //		table.setBackground(Color.WHITE);
@@ -142,11 +133,6 @@ public class listaPessoas extends JFrame {
 		txtpnFuncionrios.setBackground(Color.DARK_GRAY);
 		txtpnFuncionrios.setBounds(160, 39, 100, 20);
 		contentPane.add(txtpnFuncionrios);
-		
-	
-		tbFuncionario.getColumnModel().getColumn(0).setMinWidth(56);
-		tbFuncionario.setBounds(38, 84, 373, 103);
-		contentPane.add(tbFuncionario);
 		
 		JButton lista = new JButton("Listar");
 		lista.addActionListener(new ActionListener() {
@@ -171,5 +157,25 @@ public class listaPessoas extends JFrame {
 		});
 		lista.setBounds(333, 53, 68, 20);
 		contentPane.add(lista);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(28, 80, 376, 132);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 6, 347, 120);
+		panel.add(scrollPane_1);
+		
+		tbFuncionario = new JTable();
+		tbFuncionario.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Nome", "Idade", "Cadastrado em", "Cargo"
+			}
+		));
+		tbFuncionario.getColumnModel().getColumn(3).setPreferredWidth(93);
+		scrollPane_1.setViewportView(tbFuncionario);
 	}
 }

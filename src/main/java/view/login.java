@@ -98,6 +98,7 @@ public class login extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JTextPane txtpnMenu = new JTextPane();
+		txtpnMenu.setEditable(false);
 		txtpnMenu.setText("iPlace System");
 		txtpnMenu.setForeground(Color.WHITE);
 		txtpnMenu.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 20));

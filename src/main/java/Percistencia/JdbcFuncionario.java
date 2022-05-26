@@ -1,11 +1,12 @@
 package Percistencia;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import iplaceModel.Funcionario;
@@ -21,18 +22,20 @@ public class JdbcFuncionario {
 	
 	
 	public void inserirFuncionario (Funcionario g) {
-		String sql = "INSERT INTO funcionario (codigo_pessoa, nome_pessoa,idade,data_cadastro_funcionario, codigo_cargo)"
-				+ "VALUES (?, ?, ?, ?,?)";
+		String sql = "INSERT INTO funcionario (nome_pessoa,idade,data_cadastro_funcionario, codigo_cargo)"
+				+ "VALUES (?, ?, ?,?)";
 		PreparedStatement ps;
 	
 	
 	try {
 		ps = this.conexao.prepareStatement(sql);
-		ps.setInt(1, g.getCodigo_pessoa());
-		ps.setString(2, g.getNome_pessoa());
-		ps.setInt(3, g.getIdade());
-		ps.setDate(4,(Date) g.getData_cadastro_funcionario());
-		ps.setInt(5, g.getCodigo_cargo());
+		ps.setString(1, g.getNome_pessoa());
+		ps.setInt(2, g.getIdade());
+		SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String data_cadastro_funcionario = dFormat.format(g.getData_cadastro_funcionario());
+		java.sql.Date date1 = java.sql.Date.valueOf(data_cadastro_funcionario);
+		ps.setDate(3, date1);
+		ps.setInt(4, g.getCodigo_cargo());
 		ps.execute();
 		
 	} catch (SQLException e) {
