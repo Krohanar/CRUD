@@ -6,23 +6,30 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Percistencia.JdbcFuncionario;
+import Percistencia.conexao;
+import iplaceModel.Funcionario;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextPane;
+import com.toedter.calendar.JDayChooser;
+import com.toedter.calendar.JDateChooser;
 
 public class adicionarPessoa extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField campoNome;
+	private JTextField campoCargo;
+	private JTextField seta;
+	private JTextField campoIdade;
 
 
 	public adicionarPessoa() {
@@ -34,118 +41,113 @@ public class adicionarPessoa extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setToolTipText("");
-		textField.setBounds(67, 85, 152, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(67, 126, 152, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		campoNome = new JTextField();
+		campoNome.setToolTipText("");
+		campoNome.setBounds(67, 85, 152, 20);
+		contentPane.add(campoNome);
+		campoNome.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBackground(Color.LIGHT_GRAY);
-		textField_2.setBounds(333, 85, 72, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		campoCargo = new JTextField();
+		campoCargo.setBounds(67, 116, 152, 20);
+		contentPane.add(campoCargo);
+		campoCargo.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Cadastrar");
-		btnNewButton.setBackground(Color.DARK_GRAY);
-		btnNewButton.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		btnNewButton.setBounds(290, 215, 89, 23);
-		contentPane.add(btnNewButton);
+		JTextPane nome = new JTextPane();
+		nome.setBackground(Color.DARK_GRAY);
+		nome.setForeground(Color.WHITE);
+		nome.setText("Nome");
+		nome.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
+		nome.setBounds(30, 85, 36, 20);
+		contentPane.add(nome);
 		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		btnNewButton_1.setBackground(Color.DARK_GRAY);
-		btnNewButton_1.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1.setBounds(62, 215, 89, 23);
-		contentPane.add(btnNewButton_1);
-		
-		textField_3 = new JTextField();
-		textField_3.setBackground(Color.LIGHT_GRAY);
-		textField_3.setBounds(333, 126, 72, 20);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
-		
-		JTextPane txtpnNome = new JTextPane();
-		txtpnNome.setBackground(Color.DARK_GRAY);
-		txtpnNome.setForeground(Color.WHITE);
-		txtpnNome.setText("Nome");
-		txtpnNome.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
-		txtpnNome.setBounds(30, 85, 36, 20);
-		contentPane.add(txtpnNome);
-		
-		JTextPane txtpnCadastroDeNovos = new JTextPane();
-		txtpnCadastroDeNovos.setText("Cadastro de novos funcionários");
-		txtpnCadastroDeNovos.setForeground(Color.WHITE);
-		txtpnCadastroDeNovos.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 17));
-		txtpnCadastroDeNovos.setBackground(Color.DARK_GRAY);
-		txtpnCadastroDeNovos.setBounds(101, 39, 246, 20);
-		contentPane.add(txtpnCadastroDeNovos);
+		JTextPane tituloPagCadastro = new JTextPane();
+		tituloPagCadastro.setText("Cadastro de novos funcionários");
+		tituloPagCadastro.setForeground(Color.WHITE);
+		tituloPagCadastro.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 17));
+		tituloPagCadastro.setBackground(Color.DARK_GRAY);
+		tituloPagCadastro.setBounds(101, 39, 246, 20);
+		contentPane.add(tituloPagCadastro);
 		
 		JTextPane txtpnData = new JTextPane();
 		txtpnData.setText("Data do Cadastro");
 		txtpnData.setForeground(Color.WHITE);
 		txtpnData.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		txtpnData.setBackground(Color.DARK_GRAY);
-		txtpnData.setBounds(229, 126, 93, 20);
+		txtpnData.setBounds(254, 126, 93, 20);
 		contentPane.add(txtpnData);
 		
-		JTextPane txtpnMenu = new JTextPane();
-		txtpnMenu.setText("iPlace System");
-		txtpnMenu.setForeground(Color.WHITE);
-		txtpnMenu.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 20));
-		txtpnMenu.setBackground(new Color(153, 204, 0));
-		txtpnMenu.setBounds(0, 0, 434, 28);
-		contentPane.add(txtpnMenu);
+		JTextPane tituloEmpresa = new JTextPane();
+		tituloEmpresa.setText("iPlace System");
+		tituloEmpresa.setForeground(Color.WHITE);
+		tituloEmpresa.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 20));
+		tituloEmpresa.setBackground(new Color(153, 204, 0));
+		tituloEmpresa.setBounds(0, 0, 434, 28);
+		contentPane.add(tituloEmpresa);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBackground(new Color(153, 204, 0));
-		textPane.setBounds(0, 257, 434, 4);
-		contentPane.add(textPane);
+		JTextPane cargo = new JTextPane();
+		cargo.setText("Cargo");
+		cargo.setForeground(Color.WHITE);
+		cargo.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
+		cargo.setBackground(Color.DARK_GRAY);
+		cargo.setBounds(30, 116, 36, 20);
+		contentPane.add(cargo);
 		
-		JTextPane txtpnCargo = new JTextPane();
-		txtpnCargo.setText("Cargo");
-		txtpnCargo.setForeground(Color.WHITE);
-		txtpnCargo.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
-		txtpnCargo.setBackground(Color.DARK_GRAY);
-		txtpnCargo.setBounds(30, 126, 36, 20);
-		contentPane.add(txtpnCargo);
+		seta = new JTextField();
+		seta.setText("<");
+		seta.setForeground(Color.WHITE);
+		seta.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 18));
+		seta.setColumns(10);
+		seta.setBackground(Color.DARK_GRAY);
+		seta.setBounds(29, 39, 20, 20);
+		contentPane.add(seta);
 		
-		JTextPane txtpnId = new JTextPane();
-		txtpnId.setText("ID (automático)");
-		txtpnId.setForeground(Color.WHITE);
-		txtpnId.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
-		txtpnId.setBackground(Color.DARK_GRAY);
-		txtpnId.setBounds(243, 85, 89, 20);
-		contentPane.add(txtpnId);
+		JTextPane idade = new JTextPane();
+		idade.setText("Idade");
+		idade.setForeground(Color.WHITE);
+		idade.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
+		idade.setBackground(Color.DARK_GRAY);
+		idade.setBounds(30, 147, 36, 20);
+		contentPane.add(idade);
 		
-		textField_4 = new JTextField();
-		textField_4.setText("<");
-		textField_4.setForeground(Color.WHITE);
-		textField_4.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 18));
-		textField_4.setColumns(10);
-		textField_4.setBackground(Color.DARK_GRAY);
-		textField_4.setBounds(29, 39, 20, 20);
-		contentPane.add(textField_4);
+		campoIdade = new JTextField();
+		campoIdade.setColumns(10);
+		campoIdade.setBounds(67, 147, 152, 20);
+		contentPane.add(campoIdade);
 		
-		JTextPane txtpnDefinirSenha = new JTextPane();
-		txtpnDefinirSenha.setText("Definir Senha");
-		txtpnDefinirSenha.setForeground(Color.WHITE);
-		txtpnDefinirSenha.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
-		txtpnDefinirSenha.setBackground(Color.DARK_GRAY);
-		txtpnDefinirSenha.setBounds(90, 171, 81, 20);
-		contentPane.add(txtpnDefinirSenha);
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setDateFormatString("yyyy-MM-dd");
+		dateChooser.setBounds(254, 147, 126, 20);
+		contentPane.add(dateChooser);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(170, 171, 144, 20);
-		contentPane.add(textField_5);
+		JButton cadastra = new JButton("Cadastrar");
+		cadastra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				conexao empresa = new conexao();
+				
+				SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd");
+				String nome_pessoa = campoNome.getText();
+				int idade = Integer.parseInt(campoIdade.getText());	
+				int codigo_cargo = Integer.parseInt(campoCargo.getText());
+				String data_cadastro_funcionario = dFormat.format(dateChooser.getDate());
+			
+				
+				Funcionario g = new Funcionario();
+
+	
+				JdbcFuncionario gerente = new JdbcFuncionario(empresa.abrirconexao());
+				gerente.inserirFuncionario(g);
+				empresa.fechaconexao();
+
+			}
+		});
+		cadastra.setBounds(76, 216, 89, 23);
+		contentPane.add(cadastra);
+		
+		JButton cancela = new JButton("Cancelar");
+		cancela.setBounds(233, 216, 89, 23);
+		contentPane.add(cancela);
+		
 	}
 }
