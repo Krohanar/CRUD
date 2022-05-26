@@ -45,6 +45,7 @@ public class JdbcFuncionario {
 	}
 	
 	
+	
 //	
 //	public void inserirDataFuncionario (Funcionario d) {
 //		
@@ -102,15 +103,15 @@ public class JdbcFuncionario {
    
    public void alteraCargoFuncionario (Funcionario funcionario) {
 	
-	   String sql = ("UPDATE  funcionario SET codigo_cargo=?  WHERE nome_pessoa=?");
+	   String sql = ("UPDATE  funcionario SET codigo_cargo=?  WHERE codigo_pessoa=?");
 	   PreparedStatement ps;
 	   
 	   
 	    try {
 	   
 	       ps = this.conexao.prepareStatement(sql);
-	       ps.setString(1, funcionario.getNome_pessoa());
-	       ps.setInt(2, funcionario.getCodigo_cargo());
+	       ps.setInt(1, funcionario.getCodigo_cargo());
+	       ps.setInt(2, funcionario.getCodigo_pessoa());
 		   ps.execute();
 		
 	    }
@@ -123,14 +124,15 @@ public class JdbcFuncionario {
    
    
 	
-   public void apagarFuncionario () {
-	   String sql = "delete from funcionario";
+   public void apagarFuncionario (Funcionario funcionario) {
+	   String sql = "delete from funcionario WHERE codigo_pessoa=?";
 	   
-	   PreparedStatement gs;
+	   PreparedStatement ps;
 	    
 	   try {
-		   gs = this.conexao.prepareStatement(sql);
-		   gs.execute();
+		   ps = this.conexao.prepareStatement(sql);
+		   ps.setInt(1, funcionario.getCodigo_pessoa());
+		   ps.execute();
 		   
 	   }catch (SQLException e) {
 		   e.printStackTrace();
