@@ -46,7 +46,7 @@ public class listaPessoas extends JFrame {
 
 	public listaPessoas() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.DARK_GRAY);
@@ -63,7 +63,7 @@ public class listaPessoas extends JFrame {
 				
 				adicionarPessoa gerente = new adicionarPessoa();
 				gerente.setVisible(true);
-				setVisible(false);
+				dispose();
 			}
 		});
 		adiciona.setBounds(33, 215, 89, 23);
@@ -82,6 +82,7 @@ public class listaPessoas extends JFrame {
 				
 				editarAdmin editAdm = new editarAdmin(id, cadastro, nome);
 				editAdm.setVisible(true);
+				dispose();
 				
 			}
 		});
@@ -100,6 +101,7 @@ public class listaPessoas extends JFrame {
 				String nome = pg.getnome();
 				excluir excluiPessoa = new excluir(id, nome);
 				excluiPessoa.setVisible(true);
+				dispose();
 				
 			}
 		});

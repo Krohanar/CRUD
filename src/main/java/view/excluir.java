@@ -41,7 +41,9 @@ public class excluir extends JFrame {
 		JButton btnNewButton_1 = new JButton("N\u00E3o");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				listaPessoas lp = new listaPessoas();
+				lp.setVisible(true);
+				dispose();
 			}
 		});
 		btnNewButton_1.setBackground(Color.DARK_GRAY);

@@ -128,7 +128,10 @@ public class editarAdmin extends JFrame {
 		JButton btnNewButton_1 = new JButton("Cancelar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				
+				listaPessoas lp = new listaPessoas();
+				lp.setVisible(true);
+				dispose();
 			}
 		});
 		btnNewButton_1.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));

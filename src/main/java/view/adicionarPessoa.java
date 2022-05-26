@@ -155,7 +155,9 @@ public class adicionarPessoa extends JFrame {
 		JButton cancela = new JButton("Cancelar");
 		cancela.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
+				listaPessoas listar = new listaPessoas();
+				listar.setVisible(true);
 			}
 		});
 		cancela.setBounds(233, 216, 89, 23);

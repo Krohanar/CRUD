@@ -41,7 +41,7 @@ public class menuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				listaPessoas listaP = new listaPessoas();
 				listaP.setVisible(true);
-				setVisible(false);
+				dispose();
 			}
 		});
 
@@ -57,7 +57,7 @@ public class menuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				listaProdutos listaProd = new listaProdutos();
 				listaProd.setVisible(true);
-				setVisible(false);
+				dispose();
 			}
 		});		
 		
