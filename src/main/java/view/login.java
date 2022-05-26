@@ -88,6 +88,7 @@ public class login extends JFrame {
 				
 				menuPrincipal mm = new menuPrincipal();
 				mm.setVisible(true);
+				setVisible(false);
 				
 				
 				

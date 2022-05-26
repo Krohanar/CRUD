@@ -72,6 +72,7 @@ public class listaProdutos extends JFrame {
 		editBtn.setBackground(Color.DARK_GRAY);
 		editBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dispose();
 			}
 		});
 		editBtn.setBounds(174, 215, 89, 23);

@@ -18,12 +18,13 @@ import com.toedter.calendar.JDateChooser;
 import Percistencia.JdbcFuncionario;
 import Percistencia.conexao;
 import iplaceModel.Funcionario;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class adicionarPessoa extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField campoNome;
-	private JTextField campoCargo;
 	private JTextField seta;
 	private JTextField campoIdade;
 
@@ -43,11 +44,6 @@ public class adicionarPessoa extends JFrame {
 		campoNome.setBounds(67, 85, 152, 20);
 		contentPane.add(campoNome);
 		campoNome.setColumns(10);
-		
-		campoCargo = new JTextField();
-		campoCargo.setBounds(67, 116, 152, 20);
-		contentPane.add(campoCargo);
-		campoCargo.setColumns(10);
 		
 		JTextPane nome = new JTextPane();
 		nome.setBackground(Color.DARK_GRAY);
@@ -116,6 +112,12 @@ public class adicionarPessoa extends JFrame {
 		dateChooser.setBounds(254, 147, 126, 20);
 		contentPane.add(dateChooser);
 		
+		
+		JComboBox campoCargo = new JComboBox();
+		campoCargo.setModel(new DefaultComboBoxModel(new String[] {"Gerente", "Funcionário"}));
+		campoCargo.setBounds(67, 116, 145, 22);
+		contentPane.add(campoCargo);
+		
 		JButton cadastra = new JButton("Cadastrar");
 		cadastra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -126,7 +128,12 @@ public class adicionarPessoa extends JFrame {
 				
 				nome_pessoa = campoNome.getText();
 				idade = Integer.parseInt(campoIdade.getText());	
-				codigo_cargo = Integer.parseInt(campoCargo.getText());
+				if (campoCargo.getSelectedItem().equals("Gerente")) {
+					codigo_cargo = 1;
+				}
+				else {
+					codigo_cargo =2;
+				}
 			
 				
 				Funcionario g = new Funcionario();
@@ -146,8 +153,16 @@ public class adicionarPessoa extends JFrame {
 		contentPane.add(cadastra);
 		
 		JButton cancela = new JButton("Cancelar");
+		cancela.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				listaPessoas listar = new listaPessoas();
+				listar.setVisible(true);
+			}
+		});
 		cancela.setBounds(233, 216, 89, 23);
 		contentPane.add(cancela);
+
 		
 	}
 }

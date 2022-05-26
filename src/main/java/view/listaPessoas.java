@@ -34,16 +34,19 @@ import java.awt.Toolkit;
 import javax.swing.border.LineBorder;
 import javax.swing.ListSelectionModel;
 
+
 public class listaPessoas extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	private JTextField textField;
 	private JTable tbFuncionario;
+	
+	
 
 	public listaPessoas() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.DARK_GRAY);
@@ -60,6 +63,7 @@ public class listaPessoas extends JFrame {
 				
 				adicionarPessoa gerente = new adicionarPessoa();
 				gerente.setVisible(true);
+				dispose();
 			}
 		});
 		adiciona.setBounds(33, 215, 89, 23);
@@ -71,8 +75,14 @@ public class listaPessoas extends JFrame {
 		edita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				editarAdmin editAdm = new editarAdmin();
+				pegarDados pg = new pegarDados();
+				String id = pg.getid();
+				String cadastro = pg.getcaddata();
+				String nome = pg.getnome();
+				
+				editarAdmin editAdm = new editarAdmin(id, cadastro, nome);
 				editAdm.setVisible(true);
+				dispose();
 				
 			}
 		});
@@ -84,10 +94,14 @@ public class listaPessoas extends JFrame {
 		exclue.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		exclue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//TODO
-				excluir excluiPessoa = new excluir();
+
+
+				pegarDados pg = new pegarDados();
+				String id = pg.getid();
+				String nome = pg.getnome();
+				excluir excluiPessoa = new excluir(id, nome);
 				excluiPessoa.setVisible(true);
+				dispose();
 				
 			}
 		});
@@ -178,4 +192,23 @@ public class listaPessoas extends JFrame {
 		tbFuncionario.getColumnModel().getColumn(3).setPreferredWidth(93);
 		scrollPane_1.setViewportView(tbFuncionario);
 	}
+
+	public class pegarDados { 
+		int setar = tbFuncionario.getSelectedRow();
+		
+		String nome = tbFuncionario.getModel().getValueAt(setar, 1).toString();
+		String id =  tbFuncionario.getModel().getValueAt(setar, 0).toString();
+		String cadastro =  tbFuncionario.getModel().getValueAt(setar, 3).toString();
+		public String getnome() {
+			return this.nome;
+		}
+		public String getid() {
+			return this.id;
+		}
+		public String getcaddata() {
+			return this.cadastro;
+		}
+	}
+
 }
+

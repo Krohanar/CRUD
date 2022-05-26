@@ -3,6 +3,9 @@ package iplaceModel;
 
 import java.util.Date;
 
+import Percistencia.JdbcFuncionario;
+import Percistencia.conexao;
+
 public class Funcionario {
 
 	
@@ -50,8 +53,7 @@ public class Funcionario {
 //		this.codigo_cargo = codigo_cargo;
 //	}
 //	
-	
-	
+
 
 	public Integer getCodigo_pessoa() {
 		return codigo_pessoa;

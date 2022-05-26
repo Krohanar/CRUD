@@ -6,25 +6,34 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Percistencia.JdbcFuncionario;
+import Percistencia.conexao;
+import iplaceModel.Funcionario;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class editarAdmin extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField nometxt;
+	private JTextField idtxt;
+	private JTextField datacadtxt;
+	private JTextField senhatxt;
 
 
-	public editarAdmin() {
+	public editarAdmin(String id, String cadastro, String nome) {
+		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -58,11 +67,12 @@ public class editarAdmin extends JFrame {
 		txtpnAlterarNome.setBounds(24, 84, 79, 20);
 		contentPane.add(txtpnAlterarNome);
 		
-		textField_1 = new JTextField();
-		textField_1.setToolTipText("");
-		textField_1.setColumns(10);
-		textField_1.setBounds(102, 84, 132, 20);
-		contentPane.add(textField_1);
+		nometxt = new JTextField();
+		nometxt.setEditable(false);
+		nometxt.setToolTipText("");
+		nometxt.setColumns(10);
+		nometxt.setBounds(102, 84, 132, 20);
+		contentPane.add(nometxt);
 		
 		JTextPane txtpnData = new JTextPane();
 		txtpnData.setText("Data do Cadastro");
@@ -72,11 +82,12 @@ public class editarAdmin extends JFrame {
 		txtpnData.setBounds(244, 125, 93, 20);
 		contentPane.add(txtpnData);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBackground(Color.LIGHT_GRAY);
-		textField_2.setBounds(334, 84, 72, 20);
-		contentPane.add(textField_2);
+		idtxt = new JTextField();
+		idtxt.setEditable(false);
+		idtxt.setColumns(10);
+		idtxt.setBackground(Color.LIGHT_GRAY);
+		idtxt.setBounds(334, 84, 72, 20);
+		contentPane.add(idtxt);
 		
 		JTextPane txtpnAlterarCargo = new JTextPane();
 		txtpnAlterarCargo.setText("Alterar Cargo");
@@ -86,11 +97,6 @@ public class editarAdmin extends JFrame {
 		txtpnAlterarCargo.setBounds(24, 125, 79, 20);
 		contentPane.add(txtpnAlterarCargo);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(102, 125, 132, 20);
-		contentPane.add(textField_3);
-		
 		JTextPane txtpnId = new JTextPane();
 		txtpnId.setText("ID (automático)");
 		txtpnId.setForeground(Color.WHITE);
@@ -99,11 +105,12 @@ public class editarAdmin extends JFrame {
 		txtpnId.setBounds(248, 84, 89, 20);
 		contentPane.add(txtpnId);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBackground(Color.LIGHT_GRAY);
-		textField_4.setBounds(334, 125, 72, 20);
-		contentPane.add(textField_4);
+		datacadtxt = new JTextField();
+		datacadtxt.setEditable(false);
+		datacadtxt.setColumns(10);
+		datacadtxt.setBackground(Color.LIGHT_GRAY);
+		datacadtxt.setBounds(334, 125, 72, 20);
+		contentPane.add(datacadtxt);
 		
 		JTextPane txtpnRedefinirSenha = new JTextPane();
 		txtpnRedefinirSenha.setText("Redefinir Senha");
@@ -113,18 +120,62 @@ public class editarAdmin extends JFrame {
 		txtpnRedefinirSenha.setBounds(91, 170, 93, 20);
 		contentPane.add(txtpnRedefinirSenha);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(172, 170, 143, 20);
-		contentPane.add(textField_5);
+		senhatxt = new JTextField();
+		senhatxt.setColumns(10);
+		senhatxt.setBounds(172, 170, 143, 20);
+		contentPane.add(senhatxt);
 		
 		JButton btnNewButton_1 = new JButton("Cancelar");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				listaPessoas lp = new listaPessoas();
+				lp.setVisible(true);
+				dispose();
+			}
+		});
 		btnNewButton_1.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		btnNewButton_1.setBackground(Color.DARK_GRAY);
 		btnNewButton_1.setBounds(63, 214, 89, 23);
+		
+		
+		JComboBox cargocb = new JComboBox();
+		cargocb.setModel(new DefaultComboBoxModel(new String[] {"Gerente", "Funcionário"}));
+		cargocb.setBounds(102, 123, 132, 22);
+		contentPane.add(cargocb);
+		
+		nometxt.setText(nome);
+		idtxt.setText(id);
+		datacadtxt.setText(cadastro);
+		
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnConcludo = new JButton("Concluído");
+		btnConcludo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				conexao empresa = new conexao();
+	
+			
+				
+				Funcionario g = new Funcionario();
+				g.setCodigo_pessoa(Integer.parseInt(idtxt.getText()));
+				
+				if (cargocb.getSelectedItem().equals("Gerente")) {
+					g.setCodigo_cargo(1);
+				}
+				else {
+					g.setCodigo_cargo(2);
+					}
+				
+				
+				
+				JdbcFuncionario definircargo = new JdbcFuncionario(empresa.abrirconexao());
+				
+				definircargo.alteraCargoFuncionario(g);
+
+				empresa.fechaconexao();
+			}
+		});
 		btnConcludo.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		btnConcludo.setBackground(Color.DARK_GRAY);
 		btnConcludo.setBounds(291, 214, 89, 23);
@@ -142,5 +193,6 @@ public class editarAdmin extends JFrame {
 		textPane.setBackground(new Color(153, 204, 0));
 		textPane.setBounds(0, 257, 434, 4);
 		contentPane.add(textPane);
+
 	}
 }
