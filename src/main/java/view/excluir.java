@@ -19,12 +19,12 @@ public class excluir extends JPanel {
 		setLayout(null);
 		
 		JButton btnNewButton = new JButton("Sim");
-		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setBackground(Color.DARK_GRAY);
 		btnNewButton.setBounds(92, 192, 89, 23);
 		add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("N\u00E3o");
-		btnNewButton_1.setBackground(Color.WHITE);
+		btnNewButton_1.setBackground(Color.DARK_GRAY);
 		btnNewButton_1.setBounds(247, 192, 89, 23);
 		add(btnNewButton_1);
 		

@@ -14,13 +14,11 @@ import java.awt.Font;
 import javax.swing.JTextPane;
 import java.awt.Color;
 import java.awt.Toolkit;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class adicionaProd extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField textField;
 	private JTextPane txtpnEditarCadastroDe;
 	private JTextField textField_1;
 	private JTextPane txtpnProduto;
@@ -36,7 +34,6 @@ public class adicionaProd extends JFrame {
 	private JTextPane txtpnId;
 	private JTextPane textPane;
 	private JTextPane txtpnMenu;
-	private JButton btnNewButton_1;
 
 
 	public adicionaProd() {
@@ -48,6 +45,15 @@ public class adicionaProd extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		textField = new JTextField();
+		textField.setText("<");
+		textField.setForeground(Color.WHITE);
+		textField.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 18));
+		textField.setColumns(10);
+		textField.setBackground(Color.DARK_GRAY);
+		textField.setBounds(30, 38, 20, 20);
+		contentPane.add(textField);
 		
 		txtpnEditarCadastroDe = new JTextPane();
 		txtpnEditarCadastroDe.setText("Cadastro de novos Produtos");
@@ -98,13 +104,13 @@ public class adicionaProd extends JFrame {
 		
 		btnNewButton = new JButton("Cancelar");
 		btnNewButton.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setBackground(Color.DARK_GRAY);
 		btnNewButton.setBounds(63, 214, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		btnConcludo = new JButton("Concluído");
 		btnConcludo.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		btnConcludo.setBackground(Color.WHITE);
+		btnConcludo.setBackground(Color.DARK_GRAY);
 		btnConcludo.setBounds(291, 214, 89, 23);
 		contentPane.add(btnConcludo);
 		
@@ -148,18 +154,5 @@ public class adicionaProd extends JFrame {
 		txtpnMenu.setBackground(new Color(153, 204, 0));
 		txtpnMenu.setBounds(0, 0, 434, 28);
 		contentPane.add(txtpnMenu);
-		
-		btnNewButton_1 = new JButton("<");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				listaProdutos listaPriod = new listaProdutos();
-				listaPriod.setVisible(true);
-				
-				dispose();
-			}
-		});
-		btnNewButton_1.setFont(new Font("Franklin Gothic Medium", Font.BOLD, 9));
-		btnNewButton_1.setBounds(15, 39, 43, 23);
-		contentPane.add(btnNewButton_1);
 	}
 }

@@ -38,6 +38,7 @@ public class listaPessoas extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private JTextField textField;
 	private JTable tbFuncionario;
 
 	public listaPessoas() {
@@ -52,14 +53,13 @@ public class listaPessoas extends JFrame {
 		
 		JButton adiciona = new JButton("Adicionar");
 		adiciona.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		adiciona.setBackground(Color.WHITE);
+		adiciona.setBackground(Color.DARK_GRAY);
 		adiciona.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
 				adicionarPessoa gerente = new adicionarPessoa();
 				gerente.setVisible(true);
-				dispose();
 			}
 		});
 		adiciona.setBounds(33, 215, 89, 23);
@@ -67,13 +67,12 @@ public class listaPessoas extends JFrame {
 		
 		JButton edita = new JButton("Editar");
 		edita.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		edita.setBackground(Color.WHITE);
+		edita.setBackground(Color.DARK_GRAY);
 		edita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				editarAdmin editAdm = new editarAdmin();
 				editAdm.setVisible(true);
-				dispose();
 				
 			}
 		});
@@ -81,7 +80,7 @@ public class listaPessoas extends JFrame {
 		contentPane.add(edita);
 		
 		JButton exclue = new JButton("Excluir");
-		exclue.setBackground(Color.WHITE);
+		exclue.setBackground(Color.DARK_GRAY);
 		exclue.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		exclue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -115,6 +114,7 @@ public class listaPessoas extends JFrame {
 		scrollPane.setBounds(10, 199, 414, -126);
 		contentPane.add(scrollPane);
 		
+
 //		table.setBackground(Color.WHITE);
 		
 		textField = new JTextField();
@@ -158,18 +158,24 @@ public class listaPessoas extends JFrame {
 		lista.setBounds(333, 53, 68, 20);
 		contentPane.add(lista);
 		
-		JButton btnNewButton = new JButton("<");
-		btnNewButton.setFont(new Font("Franklin Gothic Demi", Font.BOLD, 9));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				menuPrincipal voltarMain = new menuPrincipal();
-				voltarMain.setVisible(true);
-				dispose();
+		JPanel panel = new JPanel();
+		panel.setBounds(28, 80, 376, 132);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 6, 347, 120);
+		panel.add(scrollPane_1);
+		
+		tbFuncionario = new JTable();
+		tbFuncionario.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"ID", "Nome", "Idade", "Cadastrado em", "Cargo"
 			}
-		});
-		btnNewButton.setBounds(10, 39, 46, 23);
-		contentPane.add(btnNewButton);
-
+		));
+		tbFuncionario.getColumnModel().getColumn(3).setPreferredWidth(93);
+		scrollPane_1.setViewportView(tbFuncionario);
 	}
 }

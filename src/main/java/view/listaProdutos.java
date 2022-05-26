@@ -28,6 +28,7 @@ public class listaProdutos extends JFrame {
 	private JTextPane textPane;
 	private JTextPane textPane_1;
 	private JTextPane txtpnMenu;
+	private JTextField textField;
 	
 	public listaProdutos() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
@@ -55,14 +56,12 @@ public class listaProdutos extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton adicionarBtn = new JButton("Adicionar");
-		adicionarBtn.setBackground(Color.WHITE);
+		adicionarBtn.setBackground(Color.DARK_GRAY);
 		adicionarBtn.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		adicionarBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				adicionaProd adc = new adicionaProd();
 				adc.setVisible(true);
-				
-				dispose();
 			}
 		});
 		adicionarBtn.setBounds(20, 215, 89, 23);
@@ -70,15 +69,9 @@ public class listaProdutos extends JFrame {
 		
 		JButton editBtn = new JButton("Editar");
 		editBtn.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		editBtn.setBackground(Color.WHITE);
+		editBtn.setBackground(Color.DARK_GRAY);
 		editBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				editaProd editaP = new editaProd();
-				editaP.setVisible(true);
-				
-				dispose();
-				
 			}
 		});
 		editBtn.setBounds(174, 215, 89, 23);
@@ -86,7 +79,7 @@ public class listaProdutos extends JFrame {
 		
 		JButton btnNewButton_2 = new JButton("Excluir");
 		btnNewButton_2.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		btnNewButton_2.setBackground(Color.WHITE);
+		btnNewButton_2.setBackground(Color.DARK_GRAY);
 		btnNewButton_2.setBounds(325, 215, 89, 23);
 		contentPane.add(btnNewButton_2);
 		
@@ -108,6 +101,15 @@ public class listaProdutos extends JFrame {
 		txtpnMenu.setBounds(0, 0, 435, 28);
 		contentPane.add(txtpnMenu);
 		
+		textField = new JTextField();
+		textField.setText("<");
+		textField.setForeground(Color.WHITE);
+		textField.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 18));
+		textField.setColumns(10);
+		textField.setBackground(Color.DARK_GRAY);
+		textField.setBounds(20, 39, 20, 20);
+		contentPane.add(textField);
+		
 		JTextPane txtpnProdutos = new JTextPane();
 		txtpnProdutos.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 17));
 		txtpnProdutos.setForeground(Color.WHITE);
@@ -117,24 +119,10 @@ public class listaProdutos extends JFrame {
 		contentPane.add(txtpnProdutos);
 		
 		JButton btnNewButton = new JButton("Relatório");
-		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.setBackground(Color.DARK_GRAY);
 		btnNewButton.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		btnNewButton.setBounds(325, 44, 89, 23);
 		contentPane.add(btnNewButton);
-		
-		JButton btnNewButton_1 = new JButton("<");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				menuPrincipal mainMenu = new menuPrincipal();
-				mainMenu.setVisible(true);
-				
-				dispose();
-				
-			}
-		});
-		btnNewButton_1.setFont(new Font("Franklin Gothic Medium", Font.BOLD, 10));
-		btnNewButton_1.setBounds(20, 36, 39, 23);
-		contentPane.add(btnNewButton_1);
 
 	}
 }
