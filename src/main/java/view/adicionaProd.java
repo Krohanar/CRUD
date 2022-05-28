@@ -36,7 +36,7 @@ public class adicionaProd extends JFrame {
 	private JTextField textField;
 
 
-	public adicionaProd() {
+	public adicionaProd(int cargo) {
 		setTitle("Cadastra Produto");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -104,7 +104,7 @@ public class adicionaProd extends JFrame {
 		btnNewButton = new JButton("Cancelar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listaProdutos cancelaProd = new listaProdutos();
+				listaProdutos cancelaProd = new listaProdutos(cargo);
 				cancelaProd.setVisible(true);
 					dispose();
 			}

@@ -6,8 +6,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Percistencia.JdbcFuncionario;
+import Percistencia.JdbcLogin;
+import Percistencia.conexao;
+import iplaceModel.Funcionario;
+
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
@@ -81,22 +88,22 @@ public class login extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+
+				conexao empresa = new conexao();
 				
+				Funcionario tentativa = new Funcionario();
+				tentativa.setNome_pessoa(txtLogin.getText());
+				tentativa.setSenha(txtSenha.getText());
 				
-				//if(txtLogin.equals(ger.getLogin) && txtSenha.equals(gerente.getSenha)) {
-					
-					
-				//}
-				
-				
-				menuPrincipal mm = new menuPrincipal();
-				mm.setVisible(true);
-				setVisible(false);
-				
-				
+				JdbcLogin checar = new JdbcLogin(empresa.abrirconexao());
+				checar.login(tentativa);
+				empresa.fechaconexao();
 				
 				
 			}
+			
+			
+
 		});
 		btnNewButton.setBounds(164, 186, 116, 23);
 		contentPane.add(btnNewButton);

@@ -43,7 +43,7 @@ public class listaPessoas extends JFrame {
 	
 	
 
-	public listaPessoas() {
+	public listaPessoas(int cargo) {
 		setTitle("Lista de Funcionarios");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,11 +58,15 @@ public class listaPessoas extends JFrame {
 		JButton adiciona = new JButton("Adicionar");
 		adiciona.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		adiciona.setBackground(Color.WHITE);
+		adiciona.setEnabled(false);
+		if (cargo == 1) {
+			adiciona.setEnabled(true);
+		}
 		adiciona.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				adicionarPessoa gerente = new adicionarPessoa();
+				adicionarPessoa gerente = new adicionarPessoa(cargo);
 				gerente.setVisible(true);
 				dispose();
 			}
@@ -73,6 +77,10 @@ public class listaPessoas extends JFrame {
 		JButton edita = new JButton("Editar");
 		edita.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		edita.setBackground(Color.WHITE);
+		edita.setEnabled(false);
+		if (cargo == 1) {
+			edita.setEnabled(true);
+		}
 		edita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -81,7 +89,7 @@ public class listaPessoas extends JFrame {
 				String cadastro = pg.getcaddata();
 				String nome = pg.getnome();
 				
-				editarAdmin editAdm = new editarAdmin(id, cadastro, nome);
+				editarAdmin editAdm = new editarAdmin(id, cadastro, nome, cargo);
 				editAdm.setVisible(true);
 				dispose();
 				
@@ -93,6 +101,10 @@ public class listaPessoas extends JFrame {
 		JButton exclue = new JButton("Excluir");
 		exclue.setBackground(Color.WHITE);
 		exclue.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
+		exclue.setEnabled(false);
+		if (cargo == 1) {
+			exclue.setEnabled(true);
+		}
 		exclue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -100,7 +112,7 @@ public class listaPessoas extends JFrame {
 				pegarDados pg = new pegarDados();
 				String id = pg.getid();
 				String nome = pg.getnome();
-				excluir excluiPessoa = new excluir(id, nome);
+				excluir excluiPessoa = new excluir(id, nome, cargo);
 				excluiPessoa.setVisible(true);
 				dispose();
 				
@@ -186,7 +198,7 @@ public class listaPessoas extends JFrame {
 		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				menuPrincipal voltarMainMenuFunc = new menuPrincipal();
+				menuPrincipal voltarMainMenuFunc = new menuPrincipal(cargo);
 				voltarMainMenuFunc.setVisible(true);
 				dispose();
 				

@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.Color;
+import java.awt.Color; 
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -8,14 +8,20 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import Percistencia.JdbcFuncionario;
+import Percistencia.JdbcProdutos;
 import Percistencia.conexao;
+import iplaceModel.Funcionario;
+import iplaceModel.Produto;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import java.awt.Font;
@@ -34,7 +40,7 @@ public class listaProdutos extends JFrame {
 	private JTextPane txtpnMenu;
 	private JButton btnVendaProd;
 	
-	public listaProdutos() {
+	public listaProdutos(int cargo) {
 		setTitle("Lista de Produtos");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -62,15 +68,18 @@ public class listaProdutos extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		JButton adicionarBtn = new JButton("Adicionar");
+		adicionarBtn.setEnabled(false);
 		adicionarBtn.setBackground(Color.WHITE);
 		adicionarBtn.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
+
+		if (cargo == 1) {
+			adicionarBtn.setEnabled(true);
+		}
 		adicionarBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adicionaProd adc = new adicionaProd();
+				adicionaProd adc = new adicionaProd(cargo);
 				adc.setVisible(true);
 				dispose();
-				
-				//arrumr dps
 				 Integer codigo_produto;
 				 Integer nome_produto;
 				 Date data_cadastro_produto;
@@ -89,12 +98,20 @@ public class listaProdutos extends JFrame {
 		JButton editBtn = new JButton("Editar");
 		editBtn.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		editBtn.setBackground(Color.WHITE);
+		if (cargo==1) {
+			editBtn.setEnabled(true);
+		}
+		else {
+			editBtn.setEnabled(false);
+		}
 		editBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				editaProd  editarProd = new editaProd();
+				
+				editaProd  editarProd = new editaProd(cargo);
 				editarProd.setVisible(true);
 				
 				dispose();
+				
 			}
 		});
 		editBtn.setBounds(119, 215, 89, 23);
@@ -151,7 +168,7 @@ public class listaProdutos extends JFrame {
 		brnVoltarMainMenu.setBackground(Color.WHITE);
 		brnVoltarMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				menuPrincipal voltarMainMenu = new menuPrincipal();
+				menuPrincipal voltarMainMenu = new menuPrincipal(cargo);
 				voltarMainMenu.setVisible(true);
 
 				dispose();
@@ -173,6 +190,32 @@ public class listaProdutos extends JFrame {
 		});
 		btnVendaProd.setBounds(317, 215, 89, 23);
 		contentPane.add(btnVendaProd);
+		
+		JButton atualizarbtn = new JButton("At");
+		atualizarbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				conexao empresa = new conexao();
+				JdbcProdutos produto = new JdbcProdutos(empresa.abrirconexao()); 	
+			   ArrayList<Produto> produtos = produto.listarProdutos();
+			   empresa.fechaconexao();
+			   
+			   //adiciona na tabela
+			   
+			   DefaultTableModel modelo = (DefaultTableModel)table.getModel();
+			   modelo.setNumRows(0);		   
+	   for (Produto a:produtos) {
+		   modelo.addRow(new Object[] {
+				   a.getCodigo_produto(),a.getNome_produto(), a.getValor_produto(), a.getQuantidade_produto()
+		   });	   
+			   } 			
+				
+			}
+		});
+		atualizarbtn.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
+		atualizarbtn.setBackground(Color.WHITE);
+		atualizarbtn.setBounds(95, 40, 57, 23);
+		contentPane.add(atualizarbtn);
 
 	}
 }

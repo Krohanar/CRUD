@@ -27,7 +27,7 @@ public class excluir extends JFrame {
 	/**
 	 * Create the panel.
 	 */
-	public excluir(String id, String nome) {
+	public excluir(String id, String nome, int cargo) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -42,7 +42,7 @@ public class excluir extends JFrame {
 		JButton btnNewButton_1 = new JButton("N\u00E3o");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listaPessoas lp = new listaPessoas();
+				listaPessoas lp = new listaPessoas(cargo);
 				lp.setVisible(true);
 				dispose();
 			}
@@ -86,6 +86,10 @@ public class excluir extends JFrame {
 				JdbcFuncionario apagar = new JdbcFuncionario(empresa.abrirconexao());
 				apagar.apagarFuncionario(g);
 				empresa.fechaconexao();
+				listaPessoas lp = new listaPessoas(cargo);
+				lp.setVisible(true);
+
+				dispose();
 			}
 		});
 		btnNewButton.setBackground(Color.DARK_GRAY);

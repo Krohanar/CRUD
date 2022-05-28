@@ -39,7 +39,7 @@ public class editaProd extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public editaProd() {
+	public editaProd(int cargo) {
 		setTitle("Editar Cadastro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -67,7 +67,7 @@ public class editaProd extends JFrame {
 		btnNewButton = new JButton("Cancelar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listaProdutos voltarListaProdEdit = new listaProdutos();
+				listaProdutos voltarListaProdEdit = new listaProdutos(cargo);
 				voltarListaProdEdit.setVisible(true);
 				
 				dispose();

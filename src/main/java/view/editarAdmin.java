@@ -32,7 +32,7 @@ public class editarAdmin extends JFrame {
 	private JTextField senhatxt;
 
 
-	public editarAdmin(String id, String cadastro, String nome) {
+	public editarAdmin(String id, String cadastro, String nome, int cargo) {
 		setTitle("Editar cadastro do funcionario");
 		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -131,7 +131,7 @@ public class editarAdmin extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				listaPessoas lp = new listaPessoas();
+				listaPessoas lp = new listaPessoas(cargo);
 				lp.setVisible(true);
 				dispose();
 			}

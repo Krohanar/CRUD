@@ -26,9 +26,10 @@ public class adicionarPessoa extends JFrame {
 	private JPanel contentPane;
 	private JTextField campoNome;
 	private JTextField campoIdade;
+	private JTextField senhatxt;
 
 
-	public adicionarPessoa() {
+	public adicionarPessoa(int cargoo) {
 		setTitle("Cadastro de Funcionarios");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -63,11 +64,11 @@ public class adicionarPessoa extends JFrame {
 		contentPane.add(tituloPagCadastro);
 		
 		JTextPane txtpnData = new JTextPane();
-		txtpnData.setText("Data do Cadastro");
+		txtpnData.setText("Data");
 		txtpnData.setForeground(Color.WHITE);
 		txtpnData.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		txtpnData.setBackground(Color.DARK_GRAY);
-		txtpnData.setBounds(254, 126, 93, 20);
+		txtpnData.setBounds(229, 123, 93, 20);
 		contentPane.add(txtpnData);
 		
 		JTextPane tituloEmpresa = new JTextPane();
@@ -83,7 +84,7 @@ public class adicionarPessoa extends JFrame {
 		cargo.setForeground(Color.WHITE);
 		cargo.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		cargo.setBackground(Color.DARK_GRAY);
-		cargo.setBounds(30, 116, 36, 20);
+		cargo.setBounds(229, 83, 36, 20);
 		contentPane.add(cargo);
 		
 		JTextPane idade = new JTextPane();
@@ -91,31 +92,47 @@ public class adicionarPessoa extends JFrame {
 		idade.setForeground(Color.WHITE);
 		idade.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		idade.setBackground(Color.DARK_GRAY);
-		idade.setBounds(30, 147, 36, 20);
+		idade.setBounds(30, 123, 36, 20);
 		contentPane.add(idade);
 		
 		campoIdade = new JTextField();
 		campoIdade.setColumns(10);
-		campoIdade.setBounds(67, 147, 152, 20);
+		campoIdade.setBounds(67, 123, 152, 20);
 		contentPane.add(campoIdade);
 		
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setDateFormatString("yyyy-MM-dd");
-		dateChooser.setBounds(254, 147, 126, 20);
+		dateChooser.setBounds(266, 123, 145, 20);
 		contentPane.add(dateChooser);
 		
 		
 		JComboBox campoCargo = new JComboBox();
 		campoCargo.setModel(new DefaultComboBoxModel(new String[] {"Gerente", "Funcionário"}));
-		campoCargo.setBounds(67, 116, 145, 22);
+		campoCargo.setBounds(266, 83, 145, 22);
 		contentPane.add(campoCargo);
+		
+		JTextPane senhalb = new JTextPane();
+		senhalb.setText("Senha");
+		senhalb.setForeground(Color.WHITE);
+		senhalb.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
+		senhalb.setBackground(Color.DARK_GRAY);
+		senhalb.setBounds(115, 163, 36, 20);
+		contentPane.add(senhalb);
+		
+		senhatxt = new JTextField();
+		senhatxt.setToolTipText("");
+		senhatxt.setColumns(10);
+		senhatxt.setBounds(152, 163, 152, 20);
+		contentPane.add(senhatxt);
+
+		
 		
 		JButton cadastra = new JButton("Cadastrar");
 		cadastra.setBackground(Color.WHITE);
 		cadastra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String nome_pessoa, data_cadastro_funcionario;
+				String nome_pessoa, data_cadastro_funcionario, senha;
 				int idade, codigo_cargo;
 				conexao empresa = new conexao();
 				
@@ -127,6 +144,8 @@ public class adicionarPessoa extends JFrame {
 				else {
 					codigo_cargo =2;
 				}
+				senha = senhatxt.getText();
+				
 			
 				
 				Funcionario g = new Funcionario();
@@ -134,7 +153,7 @@ public class adicionarPessoa extends JFrame {
 				g.setIdade(idade);
 				g.setCodigo_cargo(codigo_cargo);
 				g.setData_cadastro_funcionario(dateChooser.getDate());
-
+				g.setSenha(senha);
 	
 				JdbcFuncionario gerente = new JdbcFuncionario(empresa.abrirconexao());
 				gerente.inserirFuncionario(g);
@@ -149,8 +168,8 @@ public class adicionarPessoa extends JFrame {
 		cancela.setBackground(Color.WHITE);
 		cancela.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				listaPessoas listar = new listaPessoas();
+				
+				listaPessoas listar = new listaPessoas(cargoo);
 				listar.setVisible(true);
 				dispose();
 			}
@@ -158,6 +177,5 @@ public class adicionarPessoa extends JFrame {
 		cancela.setBounds(233, 216, 89, 23);
 		contentPane.add(cancela);
 
-		
 	}
 }

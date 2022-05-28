@@ -11,6 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import iplaceModel.Funcionario;
+
 import java.awt.SystemColor;
 import java.awt.Font;
 import javax.swing.UIManager;
@@ -23,7 +26,7 @@ public class menuPrincipal extends JFrame {
 	private static final long serialVersionUID = -9023214099854740452L;
 	private JPanel contentPane;
 
-	public menuPrincipal() {
+	public menuPrincipal(int fc) {
 		setTitle("Menu Principal");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,7 +44,7 @@ public class menuPrincipal extends JFrame {
 		btnFuncionario.setBackground(Color.WHITE);
 		btnFuncionario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listaPessoas listaP = new listaPessoas();
+				listaPessoas listaP = new listaPessoas(fc);
 				listaP.setVisible(true);
 				dispose();
 			}
@@ -57,7 +60,7 @@ public class menuPrincipal extends JFrame {
 		bntProduto.setBackground(Color.WHITE);
 		bntProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listaProdutos listaProd = new listaProdutos();
+				listaProdutos listaProd = new listaProdutos(fc);
 				listaProd.setVisible(true);
 				dispose();
 			}
