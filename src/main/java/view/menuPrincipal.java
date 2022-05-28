@@ -24,6 +24,7 @@ public class menuPrincipal extends JFrame {
 	private JPanel contentPane;
 
 	public menuPrincipal() {
+		setTitle("Menu Principal");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -32,11 +33,12 @@ public class menuPrincipal extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 
 		JButton btnFuncionario = new JButton("Funcionários");
 		btnFuncionario.setForeground(new Color(0, 0, 0));
 		btnFuncionario.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 20));
-		btnFuncionario.setBackground(Color.DARK_GRAY);
+		btnFuncionario.setBackground(Color.WHITE);
 		btnFuncionario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listaPessoas listaP = new listaPessoas();
@@ -52,7 +54,7 @@ public class menuPrincipal extends JFrame {
 		JButton bntProduto = new JButton("Produtos");
 		bntProduto.setForeground(new Color(0, 0, 0));
 		bntProduto.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 20));
-		bntProduto.setBackground(Color.DARK_GRAY);
+		bntProduto.setBackground(Color.WHITE);
 		bntProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listaProdutos listaProd = new listaProdutos();
@@ -78,6 +80,7 @@ public class menuPrincipal extends JFrame {
 		contentPane.add(bntSair);
 		
 		JTextPane txtpnMenu = new JTextPane();
+		txtpnMenu.setEditable(false);
 		txtpnMenu.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 20));
 		txtpnMenu.setForeground(new Color(255, 255, 255));
 		txtpnMenu.setBackground(new Color(153, 204, 0));
@@ -86,11 +89,13 @@ public class menuPrincipal extends JFrame {
 		contentPane.add(txtpnMenu);
 		
 		JTextPane textPane = new JTextPane();
+		textPane.setEditable(false);
 		textPane.setBackground(new Color(153, 204, 0));
 		textPane.setBounds(0, 257, 434, 4);
 		contentPane.add(textPane);
 		
 		JTextPane txtpnMenu_1 = new JTextPane();
+		txtpnMenu_1.setEditable(false);
 		txtpnMenu_1.setText("Menu");
 		txtpnMenu_1.setForeground(Color.WHITE);
 		txtpnMenu_1.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 17));

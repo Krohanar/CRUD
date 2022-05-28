@@ -37,6 +37,7 @@ public class excluir extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setBackground(Color.DARK_GRAY);
+		setLocationRelativeTo(null);
 		
 		JButton btnNewButton_1 = new JButton("N\u00E3o");
 		btnNewButton_1.addActionListener(new ActionListener() {

@@ -39,12 +39,12 @@ public class listaPessoas extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	private JTextField textField;
 	private JTable tbFuncionario;
 	
 	
 
 	public listaPessoas() {
+		setTitle("Lista de Funcionarios");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -53,10 +53,11 @@ public class listaPessoas extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 		
 		JButton adiciona = new JButton("Adicionar");
 		adiciona.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		adiciona.setBackground(Color.DARK_GRAY);
+		adiciona.setBackground(Color.WHITE);
 		adiciona.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -71,7 +72,7 @@ public class listaPessoas extends JFrame {
 		
 		JButton edita = new JButton("Editar");
 		edita.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		edita.setBackground(Color.DARK_GRAY);
+		edita.setBackground(Color.WHITE);
 		edita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -90,7 +91,7 @@ public class listaPessoas extends JFrame {
 		contentPane.add(edita);
 		
 		JButton exclue = new JButton("Excluir");
-		exclue.setBackground(Color.DARK_GRAY);
+		exclue.setBackground(Color.WHITE);
 		exclue.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		exclue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -128,18 +129,6 @@ public class listaPessoas extends JFrame {
 		scrollPane.setBounds(10, 199, 414, -126);
 		contentPane.add(scrollPane);
 		
-
-//		table.setBackground(Color.WHITE);
-		
-		textField = new JTextField();
-		textField.setText("<");
-		textField.setForeground(Color.WHITE);
-		textField.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 18));
-		textField.setColumns(10);
-		textField.setBackground(Color.DARK_GRAY);
-		textField.setBounds(33, 39, 20, 20);
-		contentPane.add(textField);
-		
 		JTextPane txtpnFuncionrios = new JTextPane();
 		txtpnFuncionrios.setText("Funcionários");
 		txtpnFuncionrios.setForeground(Color.WHITE);
@@ -149,6 +138,7 @@ public class listaPessoas extends JFrame {
 		contentPane.add(txtpnFuncionrios);
 		
 		JButton lista = new JButton("Listar");
+		lista.setBackground(Color.WHITE);
 		lista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -191,6 +181,20 @@ public class listaPessoas extends JFrame {
 		));
 		tbFuncionario.getColumnModel().getColumn(3).setPreferredWidth(93);
 		scrollPane_1.setViewportView(tbFuncionario);
+		
+		JButton btnNewButton = new JButton("<");
+		btnNewButton.setBackground(Color.WHITE);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuPrincipal voltarMainMenuFunc = new menuPrincipal();
+				voltarMainMenuFunc.setVisible(true);
+				dispose();
+				
+				
+			}
+		});
+		btnNewButton.setBounds(33, 39, 41, 23);
+		contentPane.add(btnNewButton);
 	}
 
 	public class pegarDados { 

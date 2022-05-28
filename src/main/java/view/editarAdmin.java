@@ -33,6 +33,7 @@ public class editarAdmin extends JFrame {
 
 
 	public editarAdmin(String id, String cadastro, String nome) {
+		setTitle("Editar cadastro do funcionario");
 		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -41,6 +42,7 @@ public class editarAdmin extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 		
 		textField = new JTextField();
 		textField.setText("<");

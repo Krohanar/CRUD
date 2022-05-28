@@ -14,6 +14,8 @@ public class Funcionario {
 	public Integer idade;
 	public Date data_cadastro_funcionario;
 	public Integer codigo_cargo;
+	public String login;
+	public Integer senha;
 		
 
 	public Funcionario() {

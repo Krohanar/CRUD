@@ -12,6 +12,8 @@ import java.awt.Color;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JSpinner;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class editaProd extends JFrame {
 
@@ -20,25 +22,25 @@ public class editaProd extends JFrame {
 	private JTextPane textPane;
 	private JButton btnNewButton;
 	private JButton btnConcludo;
-	private JTextField textField_1;
 	private JTextPane txtpnAlterarValor;
 	private JTextPane txtpnAlterarProduto;
-	private JTextField textField_2;
 	private JTextPane txtpnData;
 	private JTextPane txtpnId;
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextPane txtpnEditarCadastroDe_1;
-	private JTextField textField_5;
 	private JTextPane txtpnAlterarQtd;
 	private JTextField textField_6;
 	private JTextPane txtpnDataAtualizao;
+	private JTextField textField;
+	private JTextField textField_1;
 
 
 	/**
 	 * Create the frame.
 	 */
 	public editaProd() {
+		setTitle("Editar Cadastro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -46,8 +48,10 @@ public class editaProd extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 		
 		txtpnMenu = new JTextPane();
+		txtpnMenu.setEditable(false);
 		txtpnMenu.setText("iPlace System");
 		txtpnMenu.setForeground(Color.WHITE);
 		txtpnMenu.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 20));
@@ -61,21 +65,24 @@ public class editaProd extends JFrame {
 		contentPane.add(textPane);
 		
 		btnNewButton = new JButton("Cancelar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listaProdutos voltarListaProdEdit = new listaProdutos();
+				voltarListaProdEdit.setVisible(true);
+				
+				dispose();
+			}
+		});
 		btnNewButton.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		btnNewButton.setBackground(Color.DARK_GRAY);
+		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.setBounds(63, 214, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		btnConcludo = new JButton("Concluído");
 		btnConcludo.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		btnConcludo.setBackground(Color.DARK_GRAY);
+		btnConcludo.setBackground(Color.WHITE);
 		btnConcludo.setBounds(291, 214, 89, 23);
 		contentPane.add(btnConcludo);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(113, 125, 121, 20);
-		contentPane.add(textField_1);
 		
 		txtpnAlterarValor = new JTextPane();
 		txtpnAlterarValor.setText("Alterar Valor");
@@ -92,12 +99,6 @@ public class editaProd extends JFrame {
 		txtpnAlterarProduto.setBackground(Color.DARK_GRAY);
 		txtpnAlterarProduto.setBounds(24, 84, 89, 20);
 		contentPane.add(txtpnAlterarProduto);
-		
-		textField_2 = new JTextField();
-		textField_2.setToolTipText("");
-		textField_2.setColumns(10);
-		textField_2.setBounds(112, 84, 122, 20);
-		contentPane.add(textField_2);
 		
 		txtpnData = new JTextPane();
 		txtpnData.setText("Data do Cadastro");
@@ -116,12 +117,16 @@ public class editaProd extends JFrame {
 		contentPane.add(txtpnId);
 		
 		textField_3 = new JTextField();
+		textField_3.setEnabled(false);
+		textField_3.setEditable(false);
 		textField_3.setColumns(10);
 		textField_3.setBackground(Color.LIGHT_GRAY);
 		textField_3.setBounds(334, 125, 72, 20);
 		contentPane.add(textField_3);
 		
 		textField_4 = new JTextField();
+		textField_4.setEnabled(false);
+		textField_4.setEditable(false);
 		textField_4.setColumns(10);
 		textField_4.setBackground(Color.LIGHT_GRAY);
 		textField_4.setBounds(334, 84, 72, 20);
@@ -135,15 +140,6 @@ public class editaProd extends JFrame {
 		txtpnEditarCadastroDe_1.setBounds(114, 39, 201, 20);
 		contentPane.add(txtpnEditarCadastroDe_1);
 		
-		textField_5 = new JTextField();
-		textField_5.setText("<");
-		textField_5.setForeground(Color.WHITE);
-		textField_5.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 18));
-		textField_5.setColumns(10);
-		textField_5.setBackground(Color.DARK_GRAY);
-		textField_5.setBounds(30, 38, 20, 20);
-		contentPane.add(textField_5);
-		
 		txtpnAlterarQtd = new JTextPane();
 		txtpnAlterarQtd.setText("Alterar Qtd");
 		txtpnAlterarQtd.setForeground(Color.WHITE);
@@ -153,6 +149,8 @@ public class editaProd extends JFrame {
 		contentPane.add(txtpnAlterarQtd);
 		
 		textField_6 = new JTextField();
+		textField_6.setEditable(false);
+		textField_6.setEnabled(false);
 		textField_6.setColumns(10);
 		textField_6.setBackground(Color.LIGHT_GRAY);
 		textField_6.setBounds(334, 165, 72, 20);
@@ -169,5 +167,16 @@ public class editaProd extends JFrame {
 		JSpinner spinner = new JSpinner();
 		spinner.setBounds(113, 165, 54, 20);
 		contentPane.add(spinner);
+		
+		textField = new JTextField();
+		textField.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 9));
+		textField.setBounds(116, 84, 86, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(116, 125, 86, 20);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
 	}
 }

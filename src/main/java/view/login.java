@@ -33,6 +33,7 @@ public class login extends JFrame {
 	 * Create the frame.
 	 */
 	public login() {
+		setTitle("Login");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -42,6 +43,8 @@ public class login extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
+		
 		
 		JLabel lblNewLabel = new JLabel("Login");
 		lblNewLabel.setForeground(new Color(153, 204, 0));
@@ -74,7 +77,7 @@ public class login extends JFrame {
 		JButton btnNewButton = new JButton("Entrar");
 		btnNewButton.setForeground(SystemColor.windowText);
 		btnNewButton.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
-		btnNewButton.setBackground(Color.DARK_GRAY);
+		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

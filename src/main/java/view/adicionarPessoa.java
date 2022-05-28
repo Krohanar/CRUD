@@ -25,11 +25,11 @@ public class adicionarPessoa extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField campoNome;
-	private JTextField seta;
 	private JTextField campoIdade;
 
 
 	public adicionarPessoa() {
+		setTitle("Cadastro de Funcionarios");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -37,6 +37,7 @@ public class adicionarPessoa extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 		
 		
 		campoNome = new JTextField();
@@ -85,15 +86,6 @@ public class adicionarPessoa extends JFrame {
 		cargo.setBounds(30, 116, 36, 20);
 		contentPane.add(cargo);
 		
-		seta = new JTextField();
-		seta.setText("<");
-		seta.setForeground(Color.WHITE);
-		seta.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 18));
-		seta.setColumns(10);
-		seta.setBackground(Color.DARK_GRAY);
-		seta.setBounds(29, 39, 20, 20);
-		contentPane.add(seta);
-		
 		JTextPane idade = new JTextPane();
 		idade.setText("Idade");
 		idade.setForeground(Color.WHITE);
@@ -119,6 +111,7 @@ public class adicionarPessoa extends JFrame {
 		contentPane.add(campoCargo);
 		
 		JButton cadastra = new JButton("Cadastrar");
+		cadastra.setBackground(Color.WHITE);
 		cadastra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -153,11 +146,13 @@ public class adicionarPessoa extends JFrame {
 		contentPane.add(cadastra);
 		
 		JButton cancela = new JButton("Cancelar");
+		cancela.setBackground(Color.WHITE);
 		cancela.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				listaPessoas listar = new listaPessoas();
 				listar.setVisible(true);
+				dispose();
 			}
 		});
 		cancela.setBounds(233, 216, 89, 23);
