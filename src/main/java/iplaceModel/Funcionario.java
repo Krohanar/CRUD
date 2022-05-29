@@ -14,20 +14,10 @@ public class Funcionario {
 	public Integer idade;
 	public Date data_cadastro_funcionario;
 	public Integer codigo_cargo;
-	public String login;
-	public Integer senha;
+	public String senha;
 		
 
-	public Funcionario() {
-		
-	}
-	
-//	public Funcionario (String nome_pessoa, Integer codigo_cargo) {
-//		this.nome_pessoa = nome_pessoa;	
-//		this.codigo_cargo = codigo_cargo;
-//		
-//}
-	
+	public Funcionario() {};
 	public Funcionario(Integer codigo_pessoa, String nome_pessoa, Integer idade, Date data_cadastro_funcionario,
 			Integer codigo_cargo) {
 		this.codigo_pessoa = codigo_pessoa;
@@ -38,24 +28,6 @@ public class Funcionario {
 			
 	}
 	
-//	
-//	public Funcionario(String nome_pessoa, Integer idade, Date data_cadastro_funcionario, Integer codigo_cargo) {
-//	
-//		this.nome_pessoa = nome_pessoa;
-//		this.idade = idade;
-//		this.data_cadastro_funcionario = data_cadastro_funcionario;
-//		this.codigo_cargo = codigo_cargo;
-//	}
-//	
-//	
-//	public Funcionario(String nome_pessoa, Integer idade, Integer codigo_cargo) {
-//		
-//		this.nome_pessoa = nome_pessoa;
-//		this.idade = idade;
-//		this.codigo_cargo = codigo_cargo;
-//	}
-//	
-
 
 	public Integer getCodigo_pessoa() {
 		return codigo_pessoa;
@@ -86,6 +58,14 @@ public class Funcionario {
 	}
 	public void setCodigo_cargo(Integer codigo_cargo) {
 		this.codigo_cargo = codigo_cargo;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }

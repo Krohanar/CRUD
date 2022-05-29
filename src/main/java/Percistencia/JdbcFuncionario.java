@@ -1,6 +1,6 @@
 package Percistencia;
 
-import java.sql.Connection; 
+import java.sql.Connection;  
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,8 +22,8 @@ public class JdbcFuncionario {
 	
 	
 	public void inserirFuncionario (Funcionario g) {
-		String sql = "INSERT INTO funcionario (nome_pessoa,idade,data_cadastro_funcionario, codigo_cargo)"
-				+ "VALUES (?, ?, ?,?)";
+		String sql = "INSERT INTO funcionario (nome_pessoa,idade,data_cadastro_funcionario, codigo_cargo, senha)"
+				+ "VALUES (?, ?, ?,?, ?)";
 		PreparedStatement ps;
 	
 	
@@ -36,6 +36,7 @@ public class JdbcFuncionario {
 		java.sql.Date date1 = java.sql.Date.valueOf(data_cadastro_funcionario);
 		ps.setDate(3, date1);
 		ps.setInt(4, g.getCodigo_cargo());
+		ps.setString(5, g.getSenha());
 		ps.execute();
 		
 	} catch (SQLException e) {
