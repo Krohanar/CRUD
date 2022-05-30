@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.Color; 
+import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -34,12 +34,12 @@ public class listaProdutos extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtBuscar;
 	private JScrollPane scrollPane;
-	private JTable table;
+	private JTable tbProdutos;
 	private JTextPane textPane;
 	private JTextPane textPane_1;
 	private JTextPane txtpnMenu;
 	private JButton btnVendaProd;
-	
+
 	public listaProdutos(int cargo) {
 		setTitle("Lista de Produtos");
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
@@ -51,22 +51,16 @@ public class listaProdutos extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
-		
+
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(20, 78, 394, 126);
 		contentPane.add(scrollPane);
-		
-		table = new JTable();
-		table.setBackground(new Color(255, 255, 255));
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"ID", "Nome", "Valor", "Qtd"
-			}
-		));
-		scrollPane.setViewportView(table);
-		
+
+		tbProdutos = new JTable();
+		tbProdutos.setBackground(new Color(255, 255, 255));
+		tbProdutos.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Nome", "Valor", "Qtd" }));
+		scrollPane.setViewportView(tbProdutos);
+
 		JButton adicionarBtn = new JButton("Adicionar");
 		adicionarBtn.setEnabled(false);
 		adicionarBtn.setBackground(Color.WHITE);
@@ -80,67 +74,68 @@ public class listaProdutos extends JFrame {
 				adicionaProd adc = new adicionaProd(cargo);
 				adc.setVisible(true);
 				dispose();
-				 Integer codigo_produto;
-				 Integer nome_produto;
-				 Date data_cadastro_produto;
-				 Integer valor_produto; 
-				 Integer quantidade_produto;
-				conexao empresa = new conexao();
-				
-				
-				
-				
+
 			}
 		});
 		adicionarBtn.setBounds(20, 215, 89, 23);
 		contentPane.add(adicionarBtn);
-		
+
 		JButton editBtn = new JButton("Editar");
 		editBtn.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		editBtn.setBackground(Color.WHITE);
-		if (cargo==1) {
+		if (cargo == 1) {
 			editBtn.setEnabled(true);
-		}
-		else {
+		} else {
 			editBtn.setEnabled(false);
 		}
 		editBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				editaProd  editarProd = new editaProd(cargo);
+
+				editaProd editarProd = new editaProd(cargo);
 				editarProd.setVisible(true);
-				
+
 				dispose();
-				
+
 			}
 		});
 		editBtn.setBounds(119, 215, 89, 23);
 		contentPane.add(editBtn);
-		
+
 		JButton btnExcluirProd = new JButton("Excluir");
+		
+		
 		btnExcluirProd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				pegarDadosProd pgp = new pegarDadosProd();
+				String nomeProd= pgp.getNomeProd();
+				String valorProd= pgp.getValorProd();
+				String quantidadeProd=pgp.getQuantidadeProd();
 				
-				//arrumar mais tarde
+//				excluir excluiProd = new excluir(cargo);
+//				excluiProd.setVisible(true);
+//				int controle = 1;
+				dispose();
 				
-				//((DefaultTableModel) Jdbc.getModel()).removeRow(Jdbc.getSelectedRow());
+			
+
 			}
 		});
 		btnExcluirProd.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		btnExcluirProd.setBackground(Color.WHITE);
 		btnExcluirProd.setBounds(218, 215, 89, 23);
 		contentPane.add(btnExcluirProd);
-		
+
 		textPane = new JTextPane();
 		textPane.setBackground(new Color(153, 204, 0));
 		textPane.setBounds(0, 257, 434, 4);
 		contentPane.add(textPane);
-		
+
 		textPane_1 = new JTextPane();
 		textPane_1.setBackground(new Color(153, 204, 0));
 		textPane_1.setBounds(0, 253, 435, 4);
 		contentPane.add(textPane_1);
-		
+
 		txtpnMenu = new JTextPane();
 		txtpnMenu.setEditable(false);
 		txtpnMenu.setText("iPlace System");
@@ -149,7 +144,7 @@ public class listaProdutos extends JFrame {
 		txtpnMenu.setBackground(new Color(153, 204, 0));
 		txtpnMenu.setBounds(0, 0, 435, 28);
 		contentPane.add(txtpnMenu);
-		
+
 		JTextPane txtpnProdutos = new JTextPane();
 		txtpnProdutos.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 17));
 		txtpnProdutos.setForeground(Color.WHITE);
@@ -157,13 +152,13 @@ public class listaProdutos extends JFrame {
 		txtpnProdutos.setText("Produtos");
 		txtpnProdutos.setBounds(174, 39, 80, 20);
 		contentPane.add(txtpnProdutos);
-		
+
 		JButton btnNewButton = new JButton("Relatório");
 		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		btnNewButton.setBounds(325, 44, 89, 23);
 		contentPane.add(btnNewButton);
-		
+
 		JButton brnVoltarMainMenu = new JButton("<");
 		brnVoltarMainMenu.setBackground(Color.WHITE);
 		brnVoltarMainMenu.addActionListener(new ActionListener() {
@@ -177,39 +172,36 @@ public class listaProdutos extends JFrame {
 		brnVoltarMainMenu.setFont(new Font("Franklin Gothic Demi", Font.BOLD, 10));
 		brnVoltarMainMenu.setBounds(29, 39, 48, 23);
 		contentPane.add(brnVoltarMainMenu);
-		
+
 		btnVendaProd = new JButton("Venda");
 		btnVendaProd.setBackground(Color.WHITE);
 		btnVendaProd.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		btnVendaProd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				
+
 			}
 		});
 		btnVendaProd.setBounds(317, 215, 89, 23);
 		contentPane.add(btnVendaProd);
-		
+
 		JButton atualizarbtn = new JButton("At");
 		atualizarbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				conexao empresa = new conexao();
-				JdbcProdutos produto = new JdbcProdutos(empresa.abrirconexao()); 	
-			   ArrayList<Produto> produtos = produto.listarProdutos();
-			   empresa.fechaconexao();
-			   
-			   //adiciona na tabela
-			   
-			   DefaultTableModel modelo = (DefaultTableModel)table.getModel();
-			   modelo.setNumRows(0);		   
-	   for (Produto a:produtos) {
-		   modelo.addRow(new Object[] {
-				   a.getCodigo_produto(),a.getNome_produto(), a.getValor_produto(), a.getQuantidade_produto()
-		   });	   
-			   } 			
-				
+				JdbcProdutos produto = new JdbcProdutos(empresa.abrirconexao());
+				ArrayList<Produto> produtos = produto.listarProdutos();
+				empresa.fechaconexao();
+
+				// adiciona na tabela
+
+				DefaultTableModel modelo = (DefaultTableModel) tbProdutos.getModel();
+				modelo.setNumRows(0);
+				for (Produto a : produtos) {
+					modelo.addRow(new Object[] { a.getCodigo_produto(), a.getNome_produto(), a.getValor_produto(),
+							a.getQuantidade_produto() });
+				}
+
 			}
 		});
 		atualizarbtn.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
@@ -218,4 +210,40 @@ public class listaProdutos extends JFrame {
 		contentPane.add(atualizarbtn);
 
 	}
+	
+	public class pegarDadosProd {
+
+		int setarProd = tbProdutos.getSelectedRow();
+		String nomeProd = tbProdutos.getModel().getValueAt(setarProd, 0).toString();
+		String valorProd = tbProdutos.getModel().getValueAt(setarProd, 2).toString();
+		String quantidadeProd = tbProdutos.getModel().getValueAt(setarProd, 3).toString();
+
+		public String getNomeProd() {
+			return nomeProd;
+		}
+
+		public void setNomeProd(String nomeProd) {
+			this.nomeProd = nomeProd;
+		}
+
+		public String getValorProd() {
+			return valorProd;
+		}
+
+		public void setValorProd(String valorProd) {
+			this.valorProd = valorProd;
+		}
+
+		public String getQuantidadeProd() {
+			return quantidadeProd;
+		}
+
+		public void setQuantidadeProd(String quantidadeProd) {
+			this.quantidadeProd = quantidadeProd;
+		}
+
+	}
+
 }
+
+

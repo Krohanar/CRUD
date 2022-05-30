@@ -13,8 +13,7 @@ public class Produto {
 	public Integer valor_produto; 
 	public Integer quantidade_produto;
 	
-	public Produto(Integer codigo_produto, String nome_produto, Date data_cadastro_produto,
-			Integer valor_produto, Integer quantidade_produto) {
+	public Produto(Integer codigo_produto,String nome_produto,Date data_cadastro_produto,Integer valor_produto,Integer quantidade_produto) {
 		this.codigo_produto = codigo_produto;
 		this.nome_produto = nome_produto;
 		this.valor_produto = valor_produto;
@@ -22,6 +21,8 @@ public class Produto {
 		this.quantidade_produto = quantidade_produto;
 			
 	}
+
+	
 
 	public Integer getCodigo_produto() {
 		return codigo_produto;
