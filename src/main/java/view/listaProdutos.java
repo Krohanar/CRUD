@@ -90,8 +90,12 @@ public class listaProdutos extends JFrame {
 		}
 		editBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				pegarDadosProd pg = new pegarDadosProd();
+				String nomeProd = pg.getNomeProd();
+				String idProd = pg.getIdProd();
 
-				editaProd editarProd = new editaProd(cargo);
+				editaProd editarProd = new editaProd(nomeProd, idProd, cargo);
 				editarProd.setVisible(true);
 
 				dispose();
@@ -111,13 +115,12 @@ public class listaProdutos extends JFrame {
 				String nomeProd= pgp.getNomeProd();
 				String valorProd= pgp.getValorProd();
 				String quantidadeProd=pgp.getQuantidadeProd();
+				String idProd = pgp.getIdProd();
 				
-//				excluir excluiProd = new excluir(cargo);
-//				excluiProd.setVisible(true);
-//				int controle = 1;
+				excluirProd excluiProd = new excluirProd(nomeProd, idProd, cargo);
+				excluiProd.setVisible(true);
 				dispose();
-				
-			
+
 
 			}
 		});
@@ -154,6 +157,15 @@ public class listaProdutos extends JFrame {
 		contentPane.add(txtpnProdutos);
 
 		JButton btnNewButton = new JButton("Relatório");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				relatorio telarelatorio = new relatorio();
+				telarelatorio.setVisible(true);
+				dispose();
+				
+			}
+		});
 		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		btnNewButton.setBounds(325, 44, 89, 23);
@@ -179,6 +191,10 @@ public class listaProdutos extends JFrame {
 		btnVendaProd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
+				telaVenda vendaOpen = new telaVenda();
+				vendaOpen.setVisible(true);
+				dispose();
+				
 			}
 		});
 		btnVendaProd.setBounds(317, 215, 89, 23);
@@ -214,9 +230,10 @@ public class listaProdutos extends JFrame {
 	public class pegarDadosProd {
 
 		int setarProd = tbProdutos.getSelectedRow();
-		String nomeProd = tbProdutos.getModel().getValueAt(setarProd, 0).toString();
+		String nomeProd = tbProdutos.getModel().getValueAt(setarProd, 1).toString();
 		String valorProd = tbProdutos.getModel().getValueAt(setarProd, 2).toString();
 		String quantidadeProd = tbProdutos.getModel().getValueAt(setarProd, 3).toString();
+		String idProd= tbProdutos.getModel().getValueAt(setarProd, 0).toString();
 
 		public String getNomeProd() {
 			return nomeProd;
@@ -240,6 +257,13 @@ public class listaProdutos extends JFrame {
 
 		public void setQuantidadeProd(String quantidadeProd) {
 			this.quantidadeProd = quantidadeProd;
+		}
+		public String getIdProd() {
+			return idProd;
+		}
+
+		public void setIdProd(String idProd) {
+			this.idProd = idProd;
 		}
 
 	}

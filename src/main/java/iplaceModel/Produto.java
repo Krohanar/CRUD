@@ -23,6 +23,10 @@ public class Produto {
 	}
 
 	
+	public Produto () {
+		
+	}
+	
 
 	public Integer getCodigo_produto() {
 		return codigo_produto;

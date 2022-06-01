@@ -49,7 +49,7 @@ public class adicionaProd extends JFrame {
 	private JTextPane textPane;
 	private JTextPane txtpnMenu;
 	
-
+// DEVE ADICONAR VALOR QUANTIDADE NOME E DATA // 
 
 	public adicionaProd(int cargo) {
 		setTitle("Cadastra Produto");

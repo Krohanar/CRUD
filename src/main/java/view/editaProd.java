@@ -6,6 +6,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Percistencia.JdbcFuncionario;
+import Percistencia.JdbcProdutos;
+import Percistencia.conexao;
+import iplaceModel.Funcionario;
+import iplaceModel.Produto;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
@@ -24,22 +31,20 @@ public class editaProd extends JFrame {
 	private JButton btnConcludo;
 	private JTextPane txtpnAlterarValor;
 	private JTextPane txtpnAlterarProduto;
-	private JTextPane txtpnData;
 	private JTextPane txtpnId;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField pegaIdProd;
 	private JTextPane txtpnEditarCadastroDe_1;
 	private JTextPane txtpnAlterarQtd;
-	private JTextField textField_6;
-	private JTextPane txtpnDataAtualizao;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField nomeProduto;
+	private JTextField valorProd;
 
+	
+// TEM QUE REALIZAR A ALTERACAO APENAS DA QUANTIDADE E VALOR // 	
 
 	/**
 	 * Create the frame.
 	 */
-	public editaProd(int cargo) {
+	public editaProd(String nomeProd, String idProd,int cargo) {
 		setTitle("Editar Cadastro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -64,6 +69,32 @@ public class editaProd extends JFrame {
 		textPane.setBounds(0, 257, 434, 4);
 		contentPane.add(textPane);
 		
+		nomeProduto = new JTextField();
+		nomeProduto.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 9));
+		nomeProduto.setBounds(116, 84, 86, 20);
+		contentPane.add(nomeProduto);
+		nomeProduto.setColumns(10);
+		nomeProduto.setText(nomeProd);
+		
+		pegaIdProd = new JTextField();
+		pegaIdProd.setEnabled(false);
+		pegaIdProd.setEditable(false);
+		pegaIdProd.setColumns(10);
+		pegaIdProd.setBackground(Color.LIGHT_GRAY);
+		pegaIdProd.setBounds(334, 84, 16, 20);
+		contentPane.add(pegaIdProd);
+		pegaIdProd.setText(idProd);
+		
+		JSpinner qtdProd = new JSpinner();
+		qtdProd.setBounds(113, 165, 54, 20);
+		contentPane.add(qtdProd);	
+		
+		valorProd = new JTextField();
+		valorProd.setBounds(116, 125, 86, 20);
+		contentPane.add(valorProd);
+		valorProd.setColumns(10);
+		
+		
 		btnNewButton = new JButton("Cancelar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -79,6 +110,32 @@ public class editaProd extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		btnConcludo = new JButton("Concluído");
+		btnConcludo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				int quantidade_produto, valor_produto,codigo_produto;
+				
+				conexao empresa = new conexao();
+	
+ 			    quantidade_produto =(Integer) qtdProd.getValue();
+				valor_produto = Integer.parseInt(valorProd.getText());
+				codigo_produto = Integer.parseInt(pegaIdProd.getText());
+
+				Produto a = new Produto();	
+			    a.setQuantidade_produto(quantidade_produto);
+			    a.setValor_produto(valor_produto);
+			    a.setCodigo_produto(codigo_produto);
+
+				JdbcProdutos alteraProduto = new JdbcProdutos(empresa.abrirconexao());
+				alteraProduto.alteraProduto(a);
+				empresa.fechaconexao();
+			
+			listaProdutos ListaProdReturn = new listaProdutos(cargo);
+			ListaProdReturn.setVisible(true);
+				dispose();
+				
+			}
+		});
 		btnConcludo.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		btnConcludo.setBackground(Color.WHITE);
 		btnConcludo.setBounds(291, 214, 89, 23);
@@ -100,14 +157,6 @@ public class editaProd extends JFrame {
 		txtpnAlterarProduto.setBounds(24, 84, 89, 20);
 		contentPane.add(txtpnAlterarProduto);
 		
-		txtpnData = new JTextPane();
-		txtpnData.setText("Data do Cadastro");
-		txtpnData.setForeground(Color.WHITE);
-		txtpnData.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
-		txtpnData.setBackground(Color.DARK_GRAY);
-		txtpnData.setBounds(240, 125, 93, 20);
-		contentPane.add(txtpnData);
-		
 		txtpnId = new JTextPane();
 		txtpnId.setText("ID (automático)");
 		txtpnId.setForeground(Color.WHITE);
@@ -115,23 +164,7 @@ public class editaProd extends JFrame {
 		txtpnId.setBackground(Color.DARK_GRAY);
 		txtpnId.setBounds(244, 84, 89, 20);
 		contentPane.add(txtpnId);
-		
-		textField_3 = new JTextField();
-		textField_3.setEnabled(false);
-		textField_3.setEditable(false);
-		textField_3.setColumns(10);
-		textField_3.setBackground(Color.LIGHT_GRAY);
-		textField_3.setBounds(334, 125, 72, 20);
-		contentPane.add(textField_3);
-		
-		textField_4 = new JTextField();
-		textField_4.setEnabled(false);
-		textField_4.setEditable(false);
-		textField_4.setColumns(10);
-		textField_4.setBackground(Color.LIGHT_GRAY);
-		textField_4.setBounds(334, 84, 72, 20);
-		contentPane.add(textField_4);
-		
+				
 		txtpnEditarCadastroDe_1 = new JTextPane();
 		txtpnEditarCadastroDe_1.setText("Editar Cadastro de Produto");
 		txtpnEditarCadastroDe_1.setForeground(Color.WHITE);
@@ -147,36 +180,6 @@ public class editaProd extends JFrame {
 		txtpnAlterarQtd.setBackground(Color.DARK_GRAY);
 		txtpnAlterarQtd.setBounds(44, 165, 69, 20);
 		contentPane.add(txtpnAlterarQtd);
-		
-		textField_6 = new JTextField();
-		textField_6.setEditable(false);
-		textField_6.setEnabled(false);
-		textField_6.setColumns(10);
-		textField_6.setBackground(Color.LIGHT_GRAY);
-		textField_6.setBounds(334, 165, 72, 20);
-		contentPane.add(textField_6);
-		
-		txtpnDataAtualizao = new JTextPane();
-		txtpnDataAtualizao.setText("Data Atualização");
-		txtpnDataAtualizao.setForeground(Color.WHITE);
-		txtpnDataAtualizao.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
-		txtpnDataAtualizao.setBackground(Color.DARK_GRAY);
-		txtpnDataAtualizao.setBounds(240, 165, 93, 20);
-		contentPane.add(txtpnDataAtualizao);
-		
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(113, 165, 54, 20);
-		contentPane.add(spinner);
-		
-		textField = new JTextField();
-		textField.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 9));
-		textField.setBounds(116, 84, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(116, 125, 86, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+
 	}
 }

@@ -45,9 +45,6 @@ public class JdbcProdutos {
 					produtos.add(g);				 
 			   }	   
 			   
-			   //Funcionario(Integer codigo_pessoa, String nome_pessoa, Integer idade, Date data_cadastro_funcionario,
-			//	Integer codigo_cargo)
-			   
 			   
 		   } catch (SQLException e) {
 			   e.printStackTrace();
@@ -79,20 +76,46 @@ public class JdbcProdutos {
 		 
 	 }
 	 
+	 public void alteraProduto (Produto prod) {
+			
+		   String sql = ("UPDATE `produto` SET `quantidade_produto` = ?, `valor_produto` = ? WHERE `produto`.`codigo_produto` = ?");
+		  
+		     
+		   PreparedStatement ps;
+		   
+		   
+		    try {
+		   
+		       ps = this.conexao.prepareStatement(sql);
+		       ps.setInt(1, prod.getQuantidade_produto());
+		       ps.setInt(2, prod.getValor_produto());
+		       ps.setInt(3, prod.getCodigo_produto());
+		      
+		       
+			   ps.execute();
+			
+		    }
+		    catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			   	    	    
+	   }
+	   
 	 
-	 public void apagarProd (Produto deletaProd) {
+	 public void apagarProd (Produto produto) {
 		   String sql = "delete from produto WHERE nome_produto=?";
 		   
 		   PreparedStatement ps;
 		    
 		   try {
 			   ps = this.conexao.prepareStatement(sql);
-			   ps.setString(1, deletaProd.getNome_produto());
+			   ps.setString(1, produto.getNome_produto());
 			   ps.execute();
 			   
 		   }catch (SQLException e) {
 			   e.printStackTrace();
 		   }
 	 }
-	 
+	 	 
 }

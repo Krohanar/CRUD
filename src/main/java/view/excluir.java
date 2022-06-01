@@ -72,6 +72,7 @@ public class excluir extends JFrame {
 		getContentPane().add(nometxt);
 
 		nometxt.setColumns(10);
+		nometxt.setText(nome);
 
 		JButton btnNewButton = new JButton("Sim");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -81,12 +82,16 @@ public class excluir extends JFrame {
 
 				conexao empresa = new conexao();
 
+               nome_pessoa = nometxt.getText();	
+				
 				Funcionario g = new Funcionario();
-				g.setCodigo_pessoa(Integer.parseInt(id));
-
-				JdbcFuncionario apagar = new JdbcFuncionario(empresa.abrirconexao());
-				apagar.apagarFuncionario(g);
+				g.setNome_pessoa(nome_pessoa);
+				
+				JdbcFuncionario apagarFuncionario = new JdbcFuncionario(empresa.abrirconexao());
+				apagarFuncionario.apagarFuncionario(g);
 				empresa.fechaconexao();
+				
+				
 				listaPessoas lp = new listaPessoas(cargo);
 				lp.setVisible(true);
 
