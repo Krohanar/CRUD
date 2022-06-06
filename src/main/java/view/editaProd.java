@@ -44,7 +44,7 @@ public class editaProd extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public editaProd(String nomeProd, String idProd,int cargo) {
+	public editaProd(String nomeProd, String idProd, int valor, int cargo) {
 		setTitle("Editar Cadastro");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -94,6 +94,8 @@ public class editaProd extends JFrame {
 		contentPane.add(valorProd);
 		valorProd.setColumns(10);
 		
+
+		valorProd.setText(Integer.toString(valor));
 		
 		btnNewButton = new JButton("Cancelar");
 		btnNewButton.addActionListener(new ActionListener() {

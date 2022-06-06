@@ -28,12 +28,13 @@ public class telaVenda extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtnameProd;
 	private JTextField txtIdProd;
+	private JTextField valorProdutotxt;
 
 	/**
 	 * Create the frame.
 	 */
 
-	public telaVenda(String nomeProd, String idProd, int cargo) {
+	public telaVenda(String nomeProd, String idProd, int valor, int cargo) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -68,7 +69,16 @@ public class telaVenda extends JFrame {
 		contentPane.add(txtIdProd);
 		txtIdProd.setColumns(10);
 		txtIdProd.setText(idProd);
-
+		
+		
+		valorProdutotxt = new JTextField();
+		valorProdutotxt.setForeground(Color.DARK_GRAY);
+		valorProdutotxt.setColumns(10);
+		valorProdutotxt.setBackground(Color.WHITE);
+		valorProdutotxt.setBounds(357, 95, 46, 20);
+		valorProdutotxt.setText(Integer.toString(valor)); // Coloca o valor do produto pegando da tabela.
+		contentPane.add(valorProdutotxt);
+		
 		JButton vender = new JButton("Adicionar Venda");
 		vender.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -142,6 +152,19 @@ public class telaVenda extends JFrame {
 		lblDataDeVenda.setForeground(Color.WHITE);
 		lblDataDeVenda.setBounds(10, 143, 115, 14);
 		contentPane.add(lblDataDeVenda);
+		
+		JLabel valorlb = new JLabel("Valor do Produto");
+		valorlb.setForeground(Color.WHITE);
+		valorlb.setBounds(250, 98, 86, 14);
+		contentPane.add(valorlb);
+		
+		JLabel idprodutolb = new JLabel("ID");
+		idprodutolb.setForeground(Color.WHITE);
+		idprodutolb.setBounds(277, 61, 51, 14);
+		contentPane.add(idprodutolb);
+		
+
+		
 
 	}
 }

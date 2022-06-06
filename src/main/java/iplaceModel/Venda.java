@@ -8,9 +8,28 @@ public class Venda {
 	public Integer quantidade_venda;
 	public Integer id_produto;
     public Date data_venda;
+    public String nome_prod;
     
     
-    public void Venda (Integer codigo_venda, Integer quantidade_venda, Integer id_produto, Date data_venda) {
+    public Venda(int id_produto, int quantidade_venda, String nome_prod) {
+    
+    	this.id_produto = id_produto;
+		this.quantidade_venda = quantidade_venda;
+		this.nome_prod = nome_prod;
+    }
+
+
+	public Venda() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public Venda(int quantidade) {
+		this.quantidade_venda = quantidade;
+	}
+
+
+	public void Venda (Integer codigo_venda, Integer quantidade_venda, Integer id_produto, Date data_venda) {
         
     	this.codigo_venda = codigo_venda;
 		this.quantidade_venda = quantidade_venda;
@@ -20,16 +39,12 @@ public class Venda {
     }
     
     
-    public void Venda () {
-    	
-    }
     
     
     
-    public void Venda (int id_produto, int quantidade_venda,Date data_venda) {
+    public void Venda (int id_produto, int quantidade_venda) {
     
     	this.id_produto = id_produto;
-		this.data_venda = data_venda;
 		this.quantidade_venda = quantidade_venda;
 
     }

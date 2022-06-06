@@ -48,12 +48,9 @@ public class adicionaProd extends JFrame {
 	private JButton btnCadastrar;
 	private JTextPane textPane;
 	private JTextPane txtpnMenu;
-	
-// DEVE ADICONAR VALOR QUANTIDADE NOME E DATA // 
 
 	public adicionaProd(int cargo) {
 		setTitle("Cadastra Produto");
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 449, 300);
 		contentPane = new JPanel();

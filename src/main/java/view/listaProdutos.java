@@ -95,8 +95,9 @@ public class listaProdutos extends JFrame {
 				pegarDadosProd pg = new pegarDadosProd();
 				String nomeProd = pg.getNomeProd();
 				String idProd = pg.getIdProd();
+				int valor = Integer.valueOf(pg.getValorProd());
 
-				editaProd editarProd = new editaProd(nomeProd, idProd, cargo);
+				editaProd editarProd = new editaProd(nomeProd, idProd, valor, cargo);
 				editarProd.setVisible(true);
 
 				dispose();
@@ -165,7 +166,7 @@ public class listaProdutos extends JFrame {
 //				String nomeProd = pg.getNomeProd();
 //				String idProd = pg.getIdProd();
 
-				relatorio telarelatorio = new relatorio();
+				relatorio telarelatorio = new relatorio(cargo);
 				telarelatorio.setVisible(true);
 				dispose();
 				
@@ -201,8 +202,8 @@ public class listaProdutos extends JFrame {
 				String idProd = vend.getIdProd();
 				String valorProd= vend.getValorProd();
 				String quantidadeProd= vend.getQuantidadeProd();
-				
-				telaVenda vendaOpen = new telaVenda(nomeProd, idProd, cargo);
+				int valor = Integer.valueOf(vend.getValorProd());
+				telaVenda vendaOpen = new telaVenda(nomeProd, idProd, valor, cargo);
 				vendaOpen.setVisible(true);
 				dispose();
 				
