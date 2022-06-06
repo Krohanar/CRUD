@@ -8,21 +8,34 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import com.toedter.calendar.JDateChooser;
+
+import Percistencia.JdbcProdutos;
+import Percistencia.JdbcVenda;
+import Percistencia.conexao;
+import iplaceModel.Produto;
+import iplaceModel.Venda;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
 import java.awt.event.ActionEvent;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 
 public class relatorio extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTable table;
+	private JTextField totalVendaG;
+	private JTable tbRt;
 
-	// Relatorio deve gerar : deve apresentar todos os produtos que foram vendidos em um td periodo junto a quantos foram vendidos 
-	// campo com a soma total vendido no mesmo perido 
+	//informa o produto mais vendido no periodo escolhido 
+	//total de vendas no periodo escolhido 
 	
 	/**
 	 * Create the frame.
@@ -37,32 +50,68 @@ public class relatorio extends JFrame {
 		contentPane.setLayout(null);
 		
 		JDateChooser dateInicio = new JDateChooser();
-		dateInicio.setBounds(24, 65, 108, 20);
+		dateInicio.addKeyListener(new KeyAdapter() {
+		});
+		dateInicio.setBounds(36, 62, 108, 20);
 		contentPane.add(dateInicio);
 		
 		JDateChooser dateFim = new JDateChooser();
-		dateFim.setBounds(280, 65, 108, 20);
+		dateFim.setBounds(274, 62, 108, 20);
 		contentPane.add(dateFim);
 		
 		JLabel deQuando = new JLabel("Até");
 		deQuando.setForeground(Color.WHITE);
-		deQuando.setBounds(190, 71, 46, 14);
+		deQuando.setBounds(187, 68, 46, 14);
 		contentPane.add(deQuando);
+		
+		tbRt = new JTable();
+		tbRt.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, "", null},
+			},
+			new String[] {
+				"NomeProd.:", "Qtd.Prod.:", "DataInicio.:", "DataFim.:"
+			}
+		));
+		tbRt.setBounds(25, 127, 266, 14);
+		contentPane.add(tbRt);
+		
 		
 		JLabel infdate = new JLabel("Insira a data");
 		infdate.setForeground(Color.WHITE);
-		infdate.setBounds(10, 40, 92, 14);
+		infdate.setBounds(10, 37, 92, 14);
 		contentPane.add(infdate);
+		
+		totalVendaG = new JTextField();
+		totalVendaG.setBounds(50, 183, 86, 20);
+		contentPane.add(totalVendaG);
+		totalVendaG.setColumns(10);
+		
+		
 		
 		JButton geraRT = new JButton("Gerar");
 		geraRT.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				conexao empresa = new conexao();
+				Date data_venda;
 				
 				
+				JdbcVenda venda = new JdbcVenda(empresa.abrirconexao());
+				ArrayList<Venda> vendas = venda.buscaTotalVenda();
+
+				// adiciona na tabela
+
+				DefaultTableModel modelo = (DefaultTableModel) tbRt.getModel();
+				modelo.setNumRows(0);
+				for (Venda a : vendas) {
+					modelo.addRow(new Object[] { a.getId_produto(), a.getQuantidade_venda(), dateInicio.getData_venda(), dateFim.getData_venda()});
+				
+					empresa.fechaconexao();
+				}
 			}
 		});
-		geraRT.setBounds(167, 99, 89, 23);
+		geraRT.setBounds(173, 227, 89, 23);
 		contentPane.add(geraRT);
 		
 		JLabel lblNewLabel = new JLabel("Relatorio valor total");
@@ -70,18 +119,16 @@ public class relatorio extends JFrame {
 		lblNewLabel.setBounds(136, 11, 215, 14);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(167, 214, 86, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
 		
-		table = new JTable();
-		table.setBounds(24, 133, 379, 53);
-		contentPane.add(table);
-		
-		JLabel lblNewLabel_1 = new JLabel("valor total no periodo");
+		JLabel lblNewLabel_1 = new JLabel("Produto mais vendido:");
 		lblNewLabel_1.setForeground(Color.WHITE);
-		lblNewLabel_1.setBounds(10, 217, 115, 14);
+		lblNewLabel_1.setBounds(36, 114, 137, 14);
 		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Total de produtos vendidos:");
+		lblNewLabel_2.setForeground(Color.WHITE);
+		lblNewLabel_2.setBounds(36, 162, 160, 14);
+		contentPane.add(lblNewLabel_2);
+		
 	}
 }

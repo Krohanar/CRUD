@@ -163,8 +163,6 @@ public class adicionaProd extends JFrame {
 				empresa.fechaconexao();
 				
 				
-				
-				
 			}
 		});
 		btnCadastrar.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));

@@ -39,6 +39,7 @@ public class listaProdutos extends JFrame {
 	private JTextPane textPane_1;
 	private JTextPane txtpnMenu;
 	private JButton btnVendaProd;
+	
 
 	public listaProdutos(int cargo) {
 		setTitle("Lista de Produtos");
@@ -160,6 +161,10 @@ public class listaProdutos extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+//				pegarDadosProd pg = new pegarDadosProd();
+//				String nomeProd = pg.getNomeProd();
+//				String idProd = pg.getIdProd();
+
 				relatorio telarelatorio = new relatorio();
 				telarelatorio.setVisible(true);
 				dispose();
@@ -191,7 +196,13 @@ public class listaProdutos extends JFrame {
 		btnVendaProd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				telaVenda vendaOpen = new telaVenda();
+			pegarDadosProd vend = new pegarDadosProd();
+				String nomeProd= vend.getNomeProd();
+				String idProd = vend.getIdProd();
+				String valorProd= vend.getValorProd();
+				String quantidadeProd= vend.getQuantidadeProd();
+				
+				telaVenda vendaOpen = new telaVenda(nomeProd, idProd, cargo);
 				vendaOpen.setVisible(true);
 				dispose();
 				

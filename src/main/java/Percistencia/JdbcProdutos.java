@@ -118,4 +118,24 @@ public class JdbcProdutos {
 		   }
 	 }
 	 	 
+	 
+	 
+	 
+	 public void diminuiQuantidade (Produto produto) {
+		 String sql = "UPDATE produto SET quantidade_produto = quantidade_produto - ? WHERE codigo_produto = ?";
+				 
+	     PreparedStatement ps; 
+		 
+		 try {
+			   ps = this.conexao.prepareStatement(sql);
+			   ps.setInt(1, produto.getQuantidade_produto());
+			   ps.setInt(2, produto.getCodigo_produto());
+			   ps.execute();
+			   
+		   }catch (SQLException e) {
+			   e.printStackTrace();
+		   }
+		 
+	 }
+	 
 }
