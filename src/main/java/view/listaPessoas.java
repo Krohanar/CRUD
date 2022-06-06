@@ -56,6 +56,10 @@ public class listaPessoas extends JFrame {
 		setLocationRelativeTo(null);
 		
 		JButton adiciona = new JButton("Adicionar");
+		adiciona.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		adiciona.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		adiciona.setBackground(Color.WHITE);
 		adiciona.setEnabled(false);
@@ -180,7 +184,7 @@ public class listaPessoas extends JFrame {
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 6, 347, 120);
+		scrollPane_1.setBounds(10, 11, 356, 115);
 		panel.add(scrollPane_1);
 		
 		tbFuncionario = new JTable();

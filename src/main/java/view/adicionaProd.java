@@ -6,8 +6,21 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.springframework.format.datetime.DateFormatter;
+
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.demo.DateChooserPanel;
+
+import Percistencia.JdbcFuncionario;
+import Percistencia.JdbcProdutos;
+import Percistencia.conexao;
+import iplaceModel.Produto;
+
 import javax.swing.JTextField;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import java.awt.Font;
@@ -15,30 +28,29 @@ import javax.swing.JTextPane;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 
 public class adicionaProd extends JFrame {
 
 	private JPanel contentPane;
 	private JTextPane txtpnEditarCadastroDe;
-	private JTextField textField_1;
+	private JTextField addNomeProdtxt;
 	private JTextPane txtpnProduto;
 	private JTextPane txtpnValor;
-	private JTextField textField_2;
+	private JTextField addValortxt;
 	private JTextPane txtpnQtd;
-	private JSpinner spinner;
+	private JSpinner addQnttxt;
 	private JButton btnNewButton;
 	private JButton btnCadastrar;
-	private JTextField textField_5;
-	private JTextPane txtpnId;
 	private JTextPane textPane;
 	private JTextPane txtpnMenu;
-	private JTextField textField;
-
 
 	public adicionaProd(int cargo) {
 		setTitle("Cadastra Produto");
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 449, 300);
 		contentPane = new JPanel();
@@ -57,12 +69,11 @@ public class adicionaProd extends JFrame {
 		txtpnEditarCadastroDe.setBounds(114, 39, 219, 20);
 		contentPane.add(txtpnEditarCadastroDe);
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setToolTipText("");
-		textField_1.setColumns(10);
-		textField_1.setBounds(80, 84, 154, 20);
-		contentPane.add(textField_1);
+		addNomeProdtxt = new JTextField();
+		addNomeProdtxt.setToolTipText("");
+		addNomeProdtxt.setColumns(10);
+		addNomeProdtxt.setBounds(80, 84, 154, 20);
+		contentPane.add(addNomeProdtxt);
 		
 		txtpnProduto = new JTextPane();
 		txtpnProduto.setEditable(false);
@@ -82,11 +93,10 @@ public class adicionaProd extends JFrame {
 		txtpnValor.setBounds(34, 125, 36, 20);
 		contentPane.add(txtpnValor);
 		
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		textField_2.setBounds(80, 125, 154, 20);
-		contentPane.add(textField_2);
+		addValortxt = new JTextField();
+		addValortxt.setColumns(10);
+		addValortxt.setBounds(80, 125, 154, 20);
+		contentPane.add(addValortxt);
 		
 		txtpnQtd = new JTextPane();
 		txtpnQtd.setEditable(false);
@@ -97,9 +107,9 @@ public class adicionaProd extends JFrame {
 		txtpnQtd.setBounds(44, 165, 26, 20);
 		contentPane.add(txtpnQtd);
 		
-		spinner = new JSpinner();
-		spinner.setBounds(80, 165, 54, 20);
-		contentPane.add(spinner);
+		addQnttxt = new JSpinner();
+		addQnttxt.setBounds(80, 165, 54, 20);
+		contentPane.add(addQnttxt);
 		
 		btnNewButton = new JButton("Cancelar");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -114,34 +124,48 @@ public class adicionaProd extends JFrame {
 		btnNewButton.setBounds(63, 214, 89, 23);
 		contentPane.add(btnNewButton);
 		
+		JDateChooser dateChooser = new JDateChooser();
+		dateChooser.setDateFormatString("yyyy-MM-dd");
+		dateChooser.setBounds(278, 125, 145, 20);
+		contentPane.add(dateChooser);
+		
 		btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				//fazer logica para add item no db
+				Integer codigo_produto;
+				 String nome_produto;
+				 Date data_cadastro_produto;
+				 Integer valor_produto; 
+				 Integer quantidade_produto;
+				 conexao empresa = new conexao();
+				 
+				 codigo_produto = null;
+				 nome_produto = addNomeProdtxt.getText();
+				 data_cadastro_produto= dateChooser.getDate();
+				 valor_produto= Integer.parseInt(addValortxt.getText());
+				 quantidade_produto= (Integer)addQnttxt.getValue();
+				 
+				
+				
+				Produto g = new Produto(codigo_produto,nome_produto,data_cadastro_produto,valor_produto,quantidade_produto);
+				
+				g.setNome_produto(nome_produto);
+				g.setData_cadastro_produto(data_cadastro_produto);
+				g.setValor_produto(valor_produto);
+				g.setQuantidade_produto(quantidade_produto);
+
+				JdbcProdutos addProd = new JdbcProdutos(empresa.abrirconexao());
+				addProd.addProd(g);
+				empresa.fechaconexao();
+				
+				
 			}
 		});
 		btnCadastrar.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
 		btnCadastrar.setBackground(Color.WHITE);
 		btnCadastrar.setBounds(291, 214, 89, 23);
 		contentPane.add(btnCadastrar);
-		
-		textField_5 = new JTextField();
-		textField_5.setEnabled(false);
-		textField_5.setEditable(false);
-		textField_5.setColumns(10);
-		textField_5.setBackground(Color.LIGHT_GRAY);
-		textField_5.setBounds(344, 84, 72, 20);
-		contentPane.add(textField_5);
-		
-		txtpnId = new JTextPane();
-		txtpnId.setEditable(false);
-		txtpnId.setText("ID (automático):");
-		txtpnId.setForeground(Color.WHITE);
-		txtpnId.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
-		txtpnId.setBackground(Color.DARK_GRAY);
-		txtpnId.setBounds(244, 84, 89, 20);
-		contentPane.add(txtpnId);
 		
 		textPane = new JTextPane();
 		textPane.setEditable(false);
@@ -158,18 +182,14 @@ public class adicionaProd extends JFrame {
 		txtpnMenu.setBounds(0, 0, 434, 28);
 		contentPane.add(txtpnMenu);
 		
-		JLabel lblNewLabel = new JLabel("Data de Cadastro:");
+		JLabel lblNewLabel = new JLabel("Data:");
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		lblNewLabel.setBounds(244, 131, 89, 14);
+		lblNewLabel.setBounds(244, 125, 36, 14);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setEnabled(false);
-		textField.setEditable(false);
-		textField.setColumns(10);
-		textField.setBackground(Color.LIGHT_GRAY);
-		textField.setBounds(344, 125, 72, 20);
-		contentPane.add(textField);
+		
+		
+		
 	}
 }

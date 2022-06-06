@@ -25,11 +25,9 @@ import javax.swing.DefaultComboBoxModel;
 public class editarAdmin extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
 	private JTextField nometxt;
-	private JTextField idtxt;
-	private JTextField datacadtxt;
 	private JTextField senhatxt;
+	private JTextField pegaId;
 
 
 	public editarAdmin(String id, String cadastro, String nome, int cargo) {
@@ -44,15 +42,6 @@ public class editarAdmin extends JFrame {
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
 		
-		textField = new JTextField();
-		textField.setText("<");
-		textField.setForeground(Color.WHITE);
-		textField.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 18));
-		textField.setColumns(10);
-		textField.setBackground(Color.DARK_GRAY);
-		textField.setBounds(30, 38, 20, 20);
-		contentPane.add(textField);
-		
 		JTextPane txtpnEditarCadastroDe = new JTextPane();
 		txtpnEditarCadastroDe.setText("Editar Cadastro de Funcionário");
 		txtpnEditarCadastroDe.setForeground(Color.WHITE);
@@ -62,7 +51,7 @@ public class editarAdmin extends JFrame {
 		contentPane.add(txtpnEditarCadastroDe);
 		
 		JTextPane txtpnAlterarNome = new JTextPane();
-		txtpnAlterarNome.setText("Alterar Nome");
+		txtpnAlterarNome.setText("Nome");
 		txtpnAlterarNome.setForeground(Color.WHITE);
 		txtpnAlterarNome.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		txtpnAlterarNome.setBackground(Color.DARK_GRAY);
@@ -76,21 +65,6 @@ public class editarAdmin extends JFrame {
 		nometxt.setBounds(102, 84, 132, 20);
 		contentPane.add(nometxt);
 		
-		JTextPane txtpnData = new JTextPane();
-		txtpnData.setText("Data do Cadastro");
-		txtpnData.setForeground(Color.WHITE);
-		txtpnData.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
-		txtpnData.setBackground(Color.DARK_GRAY);
-		txtpnData.setBounds(244, 125, 93, 20);
-		contentPane.add(txtpnData);
-		
-		idtxt = new JTextField();
-		idtxt.setEditable(false);
-		idtxt.setColumns(10);
-		idtxt.setBackground(Color.LIGHT_GRAY);
-		idtxt.setBounds(334, 84, 72, 20);
-		contentPane.add(idtxt);
-		
 		JTextPane txtpnAlterarCargo = new JTextPane();
 		txtpnAlterarCargo.setText("Alterar Cargo");
 		txtpnAlterarCargo.setForeground(Color.WHITE);
@@ -98,21 +72,6 @@ public class editarAdmin extends JFrame {
 		txtpnAlterarCargo.setBackground(Color.DARK_GRAY);
 		txtpnAlterarCargo.setBounds(24, 125, 79, 20);
 		contentPane.add(txtpnAlterarCargo);
-		
-		JTextPane txtpnId = new JTextPane();
-		txtpnId.setText("ID (automático)");
-		txtpnId.setForeground(Color.WHITE);
-		txtpnId.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
-		txtpnId.setBackground(Color.DARK_GRAY);
-		txtpnId.setBounds(248, 84, 89, 20);
-		contentPane.add(txtpnId);
-		
-		datacadtxt = new JTextField();
-		datacadtxt.setEditable(false);
-		datacadtxt.setColumns(10);
-		datacadtxt.setBackground(Color.LIGHT_GRAY);
-		datacadtxt.setBounds(334, 125, 72, 20);
-		contentPane.add(datacadtxt);
 		
 		JTextPane txtpnRedefinirSenha = new JTextPane();
 		txtpnRedefinirSenha.setText("Redefinir Senha");
@@ -137,7 +96,7 @@ public class editarAdmin extends JFrame {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		btnNewButton_1.setBackground(Color.DARK_GRAY);
+		btnNewButton_1.setBackground(Color.WHITE);
 		btnNewButton_1.setBounds(63, 214, 89, 23);
 		
 		
@@ -147,39 +106,53 @@ public class editarAdmin extends JFrame {
 		contentPane.add(cargocb);
 		
 		nometxt.setText(nome);
-		idtxt.setText(id);
-		datacadtxt.setText(cadastro);
+		
+
+		pegaId = new JTextField();
+		pegaId.setBackground(Color.LIGHT_GRAY);
+		pegaId.setEditable(false);
+		pegaId.setEnabled(false);
+		pegaId.setBounds(244, 84, 0, 0);
+		contentPane.add(pegaId);
+		pegaId.setColumns(10);
+		
+		pegaId.setText(id);
+		
 		
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnConcludo = new JButton("Concluído");
 		btnConcludo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				int codigo_cargo,codigo_pessoa;
+				String senha;
 				conexao empresa = new conexao();
-	
-			
 				
-				Funcionario g = new Funcionario();
-				g.setCodigo_pessoa(Integer.parseInt(idtxt.getText()));
-				
+//				id = pegaId.getText();
 				if (cargocb.getSelectedItem().equals("Gerente")) {
-					g.setCodigo_cargo(1);
+					codigo_cargo = 1;
 				}
 				else {
-					g.setCodigo_cargo(2);
+					codigo_cargo = 2;
 					}
+				senha = senhatxt.getText();
+				codigo_pessoa = Integer.parseInt(pegaId.getText());
 				
-				
-				
-				JdbcFuncionario definircargo = new JdbcFuncionario(empresa.abrirconexao());
-				
-				definircargo.alteraCargoFuncionario(g);
+				Funcionario g = new Funcionario();	
+			    g.setCodigo_pessoa(codigo_pessoa);
+			    g.setCodigo_cargo(codigo_cargo);
+			    g.setSenha(senha);
 
+				JdbcFuncionario alteraCargoFuncionario = new JdbcFuncionario(empresa.abrirconexao());
+				alteraCargoFuncionario.alteraCargoFuncionario(g);
 				empresa.fechaconexao();
+				
 			}
 		});
 		btnConcludo.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
-		btnConcludo.setBackground(Color.DARK_GRAY);
+		btnConcludo.setBackground(Color.WHITE);
 		btnConcludo.setBounds(291, 214, 89, 23);
 		contentPane.add(btnConcludo);
 		
@@ -195,6 +168,7 @@ public class editarAdmin extends JFrame {
 		textPane.setBackground(new Color(153, 204, 0));
 		textPane.setBounds(0, 257, 434, 4);
 		contentPane.add(textPane);
+
 
 	}
 }

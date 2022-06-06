@@ -27,6 +27,8 @@ public class excluir extends JFrame {
 	/**
 	 * Create the panel.
 	 */
+
+	// String id, String nome, int cargo
 	public excluir(String id, String nome, int cargo) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -38,7 +40,7 @@ public class excluir extends JFrame {
 		contentPane.setLayout(null);
 		setBackground(Color.DARK_GRAY);
 		setLocationRelativeTo(null);
-		
+
 		JButton btnNewButton_1 = new JButton("N\u00E3o");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -47,52 +49,56 @@ public class excluir extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_1.setBackground(Color.DARK_GRAY);
+		btnNewButton_1.setBackground(Color.WHITE);
 		btnNewButton_1.setBounds(247, 192, 89, 23);
 		getContentPane().add(btnNewButton_1);
-		
-		JLabel lblNewLabel = new JLabel("Deseja realmente excluir o cadastro abaixo?");
-		lblNewLabel.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 17));
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBounds(52, 78, 330, 23);
-		getContentPane().add(lblNewLabel);
-		
+
+		JLabel txtLabel = new JLabel("Deseja realmente excluir o cadastro abaixo?");
+		txtLabel.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 17));
+		txtLabel.setForeground(Color.WHITE);
+		txtLabel.setBounds(52, 78, 330, 23);
+		getContentPane().add(txtLabel);
+
 		JTextPane textPane = new JTextPane();
 		textPane.setBackground(new Color(153, 204, 0));
 		textPane.setBounds(0, 285, 434, 4);
 		getContentPane().add(textPane);
-		
+
 		nometxt = new JTextField();
 		nometxt.setHorizontalAlignment(SwingConstants.CENTER);
 		nometxt.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		nometxt.setEditable(false);
 		nometxt.setBounds(115, 126, 194, 23);
 		getContentPane().add(nometxt);
-		nometxt.setText(nome);
+
 		nometxt.setColumns(10);
-		
+		nometxt.setText(nome);
+
 		JButton btnNewButton = new JButton("Sim");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nome_pessoa, data_cadastro_funcionario;
-				
+
+				String nome_pessoa;
+
 				conexao empresa = new conexao();
-				
+
+               nome_pessoa = nometxt.getText();	
 				
 				Funcionario g = new Funcionario();
-				g.setCodigo_pessoa(Integer.parseInt(id));
-
-	
-				JdbcFuncionario apagar = new JdbcFuncionario(empresa.abrirconexao());
-				apagar.apagarFuncionario(g);
+				g.setNome_pessoa(nome_pessoa);
+				
+				JdbcFuncionario apagarFuncionario = new JdbcFuncionario(empresa.abrirconexao());
+				apagarFuncionario.apagarFuncionario(g);
 				empresa.fechaconexao();
+				
+				
 				listaPessoas lp = new listaPessoas(cargo);
 				lp.setVisible(true);
 
 				dispose();
 			}
 		});
-		btnNewButton.setBackground(Color.DARK_GRAY);
+		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.setBounds(92, 192, 89, 23);
 		getContentPane().add(btnNewButton);
 

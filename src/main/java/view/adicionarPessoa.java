@@ -158,6 +158,7 @@ public class adicionarPessoa extends JFrame {
 				JdbcFuncionario gerente = new JdbcFuncionario(empresa.abrirconexao());
 				gerente.inserirFuncionario(g);
 				empresa.fechaconexao();
+				
 
 			}
 		});
