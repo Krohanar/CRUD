@@ -39,7 +39,6 @@ public class listaProdutos extends JFrame {
 	private JTextPane textPane_1;
 	private JTextPane txtpnMenu;
 	private JButton btnVendaProd;
-	
 
 	public listaProdutos(int cargo) {
 		setTitle("Lista de Produtos");
@@ -91,7 +90,7 @@ public class listaProdutos extends JFrame {
 		}
 		editBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				pegarDadosProd pg = new pegarDadosProd();
 				String nomeProd = pg.getNomeProd();
 				String idProd = pg.getIdProd();
@@ -108,21 +107,19 @@ public class listaProdutos extends JFrame {
 		contentPane.add(editBtn);
 
 		JButton btnExcluirProd = new JButton("Excluir");
-		
-		
+
 		btnExcluirProd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				pegarDadosProd pgp = new pegarDadosProd();
-				String nomeProd= pgp.getNomeProd();
-				String valorProd= pgp.getValorProd();
-				String quantidadeProd=pgp.getQuantidadeProd();
+				String nomeProd = pgp.getNomeProd();
+				String valorProd = pgp.getValorProd();
+				String quantidadeProd = pgp.getQuantidadeProd();
 				String idProd = pgp.getIdProd();
-				
+
 				excluirProd excluiProd = new excluirProd(nomeProd, idProd, cargo);
 				excluiProd.setVisible(true);
 				dispose();
-
 
 			}
 		});
@@ -161,7 +158,7 @@ public class listaProdutos extends JFrame {
 		JButton btnNewButton = new JButton("Relatório");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 //				pegarDadosProd pg = new pegarDadosProd();
 //				String nomeProd = pg.getNomeProd();
 //				String idProd = pg.getIdProd();
@@ -169,7 +166,7 @@ public class listaProdutos extends JFrame {
 				relatorio telarelatorio = new relatorio(cargo);
 				telarelatorio.setVisible(true);
 				dispose();
-				
+
 			}
 		});
 		btnNewButton.setBackground(Color.WHITE);
@@ -197,16 +194,16 @@ public class listaProdutos extends JFrame {
 		btnVendaProd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-			pegarDadosProd vend = new pegarDadosProd();
-				String nomeProd= vend.getNomeProd();
+				pegarDadosProd vend = new pegarDadosProd();
+				String nomeProd = vend.getNomeProd();
 				String idProd = vend.getIdProd();
-				String valorProd= vend.getValorProd();
-				String quantidadeProd= vend.getQuantidadeProd();
+				String valorProd = vend.getValorProd();
+				String quantidadeProd = vend.getQuantidadeProd();
 				int valor = Integer.valueOf(vend.getValorProd());
 				telaVenda vendaOpen = new telaVenda(nomeProd, idProd, valor, cargo);
 				vendaOpen.setVisible(true);
 				dispose();
-				
+
 			}
 		});
 		btnVendaProd.setBounds(317, 215, 89, 23);
@@ -238,14 +235,14 @@ public class listaProdutos extends JFrame {
 		contentPane.add(atualizarbtn);
 
 	}
-	
+
 	public class pegarDadosProd {
 
 		int setarProd = tbProdutos.getSelectedRow();
 		String nomeProd = tbProdutos.getModel().getValueAt(setarProd, 1).toString();
 		String valorProd = tbProdutos.getModel().getValueAt(setarProd, 2).toString();
 		String quantidadeProd = tbProdutos.getModel().getValueAt(setarProd, 3).toString();
-		String idProd= tbProdutos.getModel().getValueAt(setarProd, 0).toString();
+		String idProd = tbProdutos.getModel().getValueAt(setarProd, 0).toString();
 
 		public String getNomeProd() {
 			return nomeProd;
@@ -270,6 +267,7 @@ public class listaProdutos extends JFrame {
 		public void setQuantidadeProd(String quantidadeProd) {
 			this.quantidadeProd = quantidadeProd;
 		}
+
 		public String getIdProd() {
 			return idProd;
 		}
@@ -281,5 +279,3 @@ public class listaProdutos extends JFrame {
 	}
 
 }
-
-

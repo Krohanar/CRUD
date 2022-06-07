@@ -48,7 +48,6 @@ public class listaPessoas extends JFrame {
 
 	public listaPessoas(int cargo) {
 		setTitle("Lista de Funcionarios");
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\adell\\Downloads\\Iplace.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -58,11 +57,8 @@ public class listaPessoas extends JFrame {
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
 
-		/*
-		 * Função responsável por adicionar um novo funcionário ao banco de dados. Essa
-		 * função esta disponível apenas aos funcionários quem possuem o cargo Gerente.
-		 * 
-		 */
+		
+		
 		JButton adiciona = new JButton("Adicionar");
 		adiciona.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -76,6 +72,8 @@ public class listaPessoas extends JFrame {
 		}
 		adiciona.addMouseListener(new MouseAdapter() {
 			@Override
+			/* Método responsável por adicionar um novo funcionário ao banco de dados. Esse método
+			  esta disponível apenas aos funcionários quem possuem o cargo Gerente. */
 			public void mouseClicked(MouseEvent e) {
 
 				adicionarPessoa gerente = new adicionarPessoa(cargo);
@@ -87,8 +85,8 @@ public class listaPessoas extends JFrame {
 		contentPane.add(adiciona);
 
 		/*
-		 * Função responsável por realizar a edição de um cadastro feito no banco de
-		 * dados. Essa função esta disponível apenas para funcionários que possuem o
+		 * Parte do código responsável por realizar a edição de um cadastro feito no banco de
+		 * dados. Essa parte está disponível apenas para funcionários que possuem o
 		 * cargo de gerente.
 		 */
 		JButton edita = new JButton("Editar");
@@ -114,12 +112,8 @@ public class listaPessoas extends JFrame {
 		});
 		edita.setBounds(171, 215, 89, 23);
 		contentPane.add(edita);
+
 		
-		
-		
-		/*
-		 * Função responsável por realizar a exclusão de um cadastro no banco de dados.
-		 */
 		JButton exclue = new JButton("Excluir");
 		exclue.setBackground(Color.WHITE);
 		exclue.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 11));
@@ -128,6 +122,9 @@ public class listaPessoas extends JFrame {
 			exclue.setEnabled(true);
 		}
 		exclue.addActionListener(new ActionListener() {
+			/*
+			 * Parte responsável por realizar a exclusão de um cadastro no banco de dados.
+			 */
 			public void actionPerformed(ActionEvent e) {
 
 				pegarDados pg = new pegarDados();
@@ -168,15 +165,15 @@ public class listaPessoas extends JFrame {
 		txtpnFuncionrios.setBackground(Color.DARK_GRAY);
 		txtpnFuncionrios.setBounds(160, 39, 100, 20);
 		contentPane.add(txtpnFuncionrios);
-		
-		
-		/*
-		 * 
-		 * 
-		 */
+
 		JButton lista = new JButton("Listar");
 		lista.setBackground(Color.WHITE);
 		lista.addActionListener(new ActionListener() {
+
+			/*
+			 * Parte do código responsável por renderizar a lista na tela.
+			 * 
+			 */
 			public void actionPerformed(ActionEvent e) {
 
 				conexao empresa = new conexao();
@@ -188,7 +185,7 @@ public class listaPessoas extends JFrame {
 				modelo.setNumRows(0);
 				for (Funcionario a : funcionarios) {
 					modelo.addRow(new Object[] { a.getCodigo_pessoa(), a.getNome_pessoa(), a.getIdade(),
-							a.getData_cadastro_funcionario(), a.getCodigo_cargo() });
+							a.getData_cadastro_funcionario(), a.getCodigo_cargo_string() });
 				}
 
 			}

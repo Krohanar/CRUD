@@ -46,7 +46,7 @@ public class menuPrincipal extends JFrame {
 		setLocationRelativeTo(null);
 
 		
-		//Abre a interface de Usuário.
+		// Abre a interface de Usuário.
 		JButton btnFuncionario = new JButton("Funcionários");
 		btnFuncionario.setForeground(new Color(0, 0, 0));
 		btnFuncionario.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 20));
@@ -62,7 +62,7 @@ public class menuPrincipal extends JFrame {
 		btnFuncionario.setBounds(238, 93, 143, 114);
 		contentPane.add(btnFuncionario);
 
-		//Abre a interface de Produtos.
+		// Abre a interface de Produtos.
 		JButton bntProduto = new JButton("Produtos");
 		bntProduto.setForeground(new Color(0, 0, 0));
 		bntProduto.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 20));

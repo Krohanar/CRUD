@@ -14,7 +14,7 @@ public class conexao {
 	public Connection abrirconexao() {
 		String url = "jdbc:mysql://localhost:3306/api_empresa?useTimezone=true&serverTimezone=UTC";
 		String user = "root";
-		String password = "geanlucas";
+		String password = "123456";
 		
 		try {
 			conexao = DriverManager.getConnection(url, user, password);

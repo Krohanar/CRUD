@@ -168,8 +168,5 @@ public class telaVenda extends JFrame {
 		idprodutolb.setBounds(277, 61, 51, 14);
 		contentPane.add(idprodutolb);
 		
-
-		
-
 	}
 }

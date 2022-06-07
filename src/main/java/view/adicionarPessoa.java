@@ -28,7 +28,6 @@ public class adicionarPessoa extends JFrame {
 	private JTextField campoIdade;
 	private JTextField senhatxt;
 
-
 	public adicionarPessoa(int cargoo) {
 		setTitle("Cadastro de Funcionarios");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -39,14 +38,13 @@ public class adicionarPessoa extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
-		
-		
+
 		campoNome = new JTextField();
 		campoNome.setToolTipText("");
 		campoNome.setBounds(67, 85, 152, 20);
 		contentPane.add(campoNome);
 		campoNome.setColumns(10);
-		
+
 		JTextPane nome = new JTextPane();
 		nome.setBackground(Color.DARK_GRAY);
 		nome.setForeground(Color.WHITE);
@@ -54,7 +52,7 @@ public class adicionarPessoa extends JFrame {
 		nome.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
 		nome.setBounds(30, 85, 36, 20);
 		contentPane.add(nome);
-		
+
 		JTextPane tituloPagCadastro = new JTextPane();
 		tituloPagCadastro.setText("Cadastro de novos funcionários");
 		tituloPagCadastro.setForeground(Color.WHITE);
@@ -62,7 +60,7 @@ public class adicionarPessoa extends JFrame {
 		tituloPagCadastro.setBackground(Color.DARK_GRAY);
 		tituloPagCadastro.setBounds(101, 39, 246, 20);
 		contentPane.add(tituloPagCadastro);
-		
+
 		JTextPane txtpnData = new JTextPane();
 		txtpnData.setText("Data");
 		txtpnData.setForeground(Color.WHITE);
@@ -70,7 +68,7 @@ public class adicionarPessoa extends JFrame {
 		txtpnData.setBackground(Color.DARK_GRAY);
 		txtpnData.setBounds(229, 123, 93, 20);
 		contentPane.add(txtpnData);
-		
+
 		JTextPane tituloEmpresa = new JTextPane();
 		tituloEmpresa.setText("iPlace System");
 		tituloEmpresa.setForeground(Color.WHITE);
@@ -78,7 +76,7 @@ public class adicionarPessoa extends JFrame {
 		tituloEmpresa.setBackground(new Color(153, 204, 0));
 		tituloEmpresa.setBounds(0, 0, 434, 28);
 		contentPane.add(tituloEmpresa);
-		
+
 		JTextPane cargo = new JTextPane();
 		cargo.setText("Cargo");
 		cargo.setForeground(Color.WHITE);
@@ -86,7 +84,7 @@ public class adicionarPessoa extends JFrame {
 		cargo.setBackground(Color.DARK_GRAY);
 		cargo.setBounds(229, 83, 36, 20);
 		contentPane.add(cargo);
-		
+
 		JTextPane idade = new JTextPane();
 		idade.setText("Idade");
 		idade.setForeground(Color.WHITE);
@@ -94,23 +92,22 @@ public class adicionarPessoa extends JFrame {
 		idade.setBackground(Color.DARK_GRAY);
 		idade.setBounds(30, 123, 36, 20);
 		contentPane.add(idade);
-		
+
 		campoIdade = new JTextField();
 		campoIdade.setColumns(10);
 		campoIdade.setBounds(67, 123, 152, 20);
 		contentPane.add(campoIdade);
-		
+
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setDateFormatString("yyyy-MM-dd");
 		dateChooser.setBounds(266, 123, 145, 20);
 		contentPane.add(dateChooser);
-		
-		
+
 		JComboBox campoCargo = new JComboBox();
-		campoCargo.setModel(new DefaultComboBoxModel(new String[] {"Gerente", "Funcionário"}));
+		campoCargo.setModel(new DefaultComboBoxModel(new String[] { "Gerente", "Funcionário" }));
 		campoCargo.setBounds(266, 83, 145, 22);
 		contentPane.add(campoCargo);
-		
+
 		JTextPane senhalb = new JTextPane();
 		senhalb.setText("Senha");
 		senhalb.setForeground(Color.WHITE);
@@ -118,14 +115,13 @@ public class adicionarPessoa extends JFrame {
 		senhalb.setBackground(Color.DARK_GRAY);
 		senhalb.setBounds(115, 163, 36, 20);
 		contentPane.add(senhalb);
-		
+
 		senhatxt = new JTextField();
 		senhatxt.setToolTipText("");
 		senhatxt.setColumns(10);
 		senhatxt.setBounds(152, 163, 152, 20);
 		contentPane.add(senhatxt);
 
-		
 		/*
 		 * Função responsável por adicionar um funcionário ao banco de dados.
 		 * 
@@ -134,45 +130,41 @@ public class adicionarPessoa extends JFrame {
 		cadastra.setBackground(Color.WHITE);
 		cadastra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String nome_pessoa, data_cadastro_funcionario, senha;
 				int idade, codigo_cargo;
 				conexao empresa = new conexao();
-				
+
 				nome_pessoa = campoNome.getText();
-				idade = Integer.parseInt(campoIdade.getText());	
+				idade = Integer.parseInt(campoIdade.getText());
 				if (campoCargo.getSelectedItem().equals("Gerente")) {
 					codigo_cargo = 1;
-				}
-				else {
-					codigo_cargo =2;
+				} else {
+					codigo_cargo = 2;
 				}
 				senha = senhatxt.getText();
-				
-			
-				
+
 				Funcionario g = new Funcionario();
 				g.setNome_pessoa(nome_pessoa);
 				g.setIdade(idade);
 				g.setCodigo_cargo(codigo_cargo);
 				g.setData_cadastro_funcionario(dateChooser.getDate());
 				g.setSenha(senha);
-	
+
 				JdbcFuncionario gerente = new JdbcFuncionario(empresa.abrirconexao());
 				gerente.inserirFuncionario(g);
 				empresa.fechaconexao();
-				
 
 			}
 		});
 		cadastra.setBounds(76, 216, 89, 23);
 		contentPane.add(cadastra);
-		
+
 		JButton cancela = new JButton("Cancelar");
 		cancela.setBackground(Color.WHITE);
 		cancela.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				listaPessoas listar = new listaPessoas(cargoo);
 				listar.setVisible(true);
 				dispose();
