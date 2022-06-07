@@ -16,7 +16,11 @@ public class Funcionario {
 	public Integer codigo_cargo;
 	public String senha;
 		
-
+/*
+ * Objeto/construtor responsavel pelo atributos da classe Funcionario.
+ * A diferenciação entre Funcionarios ocorre quando definimos o codigo do cargo
+ * podendo ser um funcionario simples ou gerente.
+ */
 	public Funcionario() {};
 	public Funcionario(Integer codigo_pessoa, String nome_pessoa, Integer idade, Date data_cadastro_funcionario,
 			Integer codigo_cargo) {

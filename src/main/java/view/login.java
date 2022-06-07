@@ -32,12 +32,12 @@ public class login extends JFrame {
 	private JTextField txtLogin;
 	private JTextField txtSenha;
 
-	/**
-	 * Launch the application.
-	 */
+	
 
 	/**
-	 * Create the frame.
+	 * Classe responsável por realizar o login
+	 * Funcionário deve estar cadastrado no banco de dados.
+	 * Retorna acesso ao sistema.
 	 */
 	public login() {
 		setTitle("Login");
@@ -81,6 +81,11 @@ public class login extends JFrame {
 		lblNewLabel_2.setBounds(125, 151, 39, 14);
 		contentPane.add(lblNewLabel_2);
 		
+		
+		/*
+		 * Função responsável por efetuar o login do usuário, realizando a consulta com o banco de dados
+		 * e verificando os dados inseridos.
+		 */
 		JButton btnNewButton = new JButton("Entrar");
 		btnNewButton.setForeground(SystemColor.windowText);
 		btnNewButton.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 12));
@@ -98,6 +103,7 @@ public class login extends JFrame {
 				JdbcLogin checar = new JdbcLogin(empresa.abrirconexao());
 				checar.login(tentativa);
 				empresa.fechaconexao();
+				dispose();
 				
 				
 			}

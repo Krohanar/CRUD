@@ -45,6 +45,7 @@ public class telaVenda extends JFrame {
 		contentPane.setLayout(null);
 
 		txtnameProd = new JTextField();
+		txtnameProd.setForeground(Color.WHITE);
 		txtnameProd.setBackground(Color.WHITE);
 		txtnameProd.setEnabled(false);
 		txtnameProd.setEditable(false);
@@ -63,6 +64,8 @@ public class telaVenda extends JFrame {
 		contentPane.add(qtdProd);
 
 		txtIdProd = new JTextField();
+		txtIdProd.setEnabled(false);
+		txtIdProd.setEditable(false);
 		txtIdProd.setForeground(Color.DARK_GRAY);
 		txtIdProd.setBackground(Color.WHITE);
 		txtIdProd.setBounds(373, 58, 30, 20);
@@ -72,6 +75,8 @@ public class telaVenda extends JFrame {
 		
 		
 		valorProdutotxt = new JTextField();
+		valorProdutotxt.setEditable(false);
+		valorProdutotxt.setEnabled(false);
 		valorProdutotxt.setForeground(Color.DARK_GRAY);
 		valorProdutotxt.setColumns(10);
 		valorProdutotxt.setBackground(Color.WHITE);

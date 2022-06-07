@@ -13,6 +13,8 @@ import iplaceModel.Produto;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -44,6 +46,7 @@ public class excluirProd extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		nomeProduto = new JTextField();
+		nomeProduto.setEditable(false);
 		nomeProduto.setBounds(104, 126, 194, 23);
 		contentPane.add(nomeProduto);
 		nomeProduto.setColumns(10);
@@ -68,7 +71,9 @@ public class excluirProd extends JFrame {
 				
 				listaProdutos excluirVoltar = new listaProdutos(cargo);
 		        excluirVoltar.setVisible(true);
+		        JOptionPane.showMessageDialog(null, "Excluido com sucesso");
 		        dispose();
+		        
 
 			}
 		});

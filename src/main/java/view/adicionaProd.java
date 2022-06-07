@@ -22,6 +22,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import java.awt.Font;
 import javax.swing.JTextPane;
@@ -158,6 +159,13 @@ public class adicionaProd extends JFrame {
 				JdbcProdutos addProd = new JdbcProdutos(empresa.abrirconexao());
 				addProd.addProd(g);
 				empresa.fechaconexao();
+				
+				JOptionPane.showMessageDialog(null, "Cadastrado com sucesso");
+				 
+				listaProdutos listaProdAddVolta = new listaProdutos(cargo);
+				listaProdAddVolta.setVisible(true);
+				dispose();
+			
 				
 				
 			}

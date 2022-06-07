@@ -126,7 +126,10 @@ public class adicionarPessoa extends JFrame {
 		contentPane.add(senhatxt);
 
 		
-		
+		/*
+		 * Função responsável por adicionar um funcionário ao banco de dados.
+		 * 
+		 */
 		JButton cadastra = new JButton("Cadastrar");
 		cadastra.setBackground(Color.WHITE);
 		cadastra.addActionListener(new ActionListener() {

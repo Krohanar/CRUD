@@ -25,6 +25,13 @@ public class menuPrincipal extends JFrame {
 
 	private static final long serialVersionUID = -9023214099854740452L;
 	private JPanel contentPane;
+	
+	
+	
+	/*
+	 * Menu principal: Reponsavel por realizar a transição entre as interfaces do sistema
+	 * redirecionando para duas interfaces: Lista de Produtos e Lista de Funcionarios.
+	 */
 
 	public menuPrincipal(int fc) {
 		setTitle("Menu Principal");
@@ -38,6 +45,8 @@ public class menuPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		setLocationRelativeTo(null);
 
+		
+		//Abre a interface de Usuário.
 		JButton btnFuncionario = new JButton("Funcionários");
 		btnFuncionario.setForeground(new Color(0, 0, 0));
 		btnFuncionario.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 20));
@@ -53,7 +62,7 @@ public class menuPrincipal extends JFrame {
 		btnFuncionario.setBounds(238, 93, 143, 114);
 		contentPane.add(btnFuncionario);
 
-
+		//Abre a interface de Produtos.
 		JButton bntProduto = new JButton("Produtos");
 		bntProduto.setForeground(new Color(0, 0, 0));
 		bntProduto.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 20));
