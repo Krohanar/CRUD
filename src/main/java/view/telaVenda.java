@@ -43,6 +43,7 @@ public class telaVenda extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 
 		txtnameProd = new JTextField();
 		txtnameProd.setBackground(Color.WHITE);

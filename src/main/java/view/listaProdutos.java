@@ -61,6 +61,7 @@ public class listaProdutos extends JFrame {
 		tbProdutos.setBackground(new Color(255, 255, 255));
 		tbProdutos.setModel(new DefaultTableModel(new Object[][] {}, new String[] { "ID", "Nome", "Valor", "Qtd" }));
 		scrollPane.setViewportView(tbProdutos);
+		tbProdutos.setAutoCreateRowSorter(true);
 
 		JButton adicionarBtn = new JButton("Adicionar");
 		adicionarBtn.setEnabled(false);

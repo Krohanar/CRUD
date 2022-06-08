@@ -197,6 +197,7 @@ public class listaPessoas extends JFrame {
 		));
 		tbFuncionario.getColumnModel().getColumn(3).setPreferredWidth(93);
 		scrollPane_1.setViewportView(tbFuncionario);
+		tbFuncionario.setAutoCreateRowSorter(true);
 		
 		JButton btnNewButton = new JButton("<");
 		btnNewButton.setBackground(Color.WHITE);

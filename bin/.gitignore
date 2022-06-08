@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+/.gitignore
+/.mvn/
+/jgoodies-forms-1.8.0-sources.jar
+/jgoodies-forms-1.8.0.jar
+/mvnw
+/mvnw.cmd
+/pom.xml
+/src/
+/teste

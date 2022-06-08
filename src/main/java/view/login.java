@@ -99,6 +99,8 @@ public class login extends JFrame {
 				checar.login(tentativa);
 				empresa.fechaconexao();
 				
+				dispose();
+				
 				
 			}
 			

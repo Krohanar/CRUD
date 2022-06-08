@@ -35,6 +35,7 @@ public class excluirProd extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setLocationRelativeTo(null);
 		
 		JLabel lblNewLabel = new JLabel("Deseja realmente excluir o produto abaixo?");
 		lblNewLabel.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 17));
